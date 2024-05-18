@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
@@ -21,6 +22,65 @@ return new class extends Migration
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('categoria', function (Blueprint $table) {
+            $table->bigIncrements('id_categoria');
+            $table->string('nombre', 255);
+            $table->string('descripcion', 255);
+            $table->timestamps();
+        });
+
+        Schema::create('puntaje', function (Blueprint $table) {
+            $table->bigIncrements('id_puntaje');
+            $table->integer('puntaje');
+            $table->string('comentario', 255)->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('juego', function (Blueprint $table) {
+            $table->bigIncrements('id_juego');
+            $table->string('nombre', 255);
+            $table->string('descripcion', 45);
+            $table->foreignId('categoria_id_categoria')->constrained('categoria', 'id_categoria');
+            $table->foreignId('puntaje_id_puntaje')->constrained('puntaje', 'id_puntaje');
+            $table->timestamps();
+        });
+
+        Schema::create('favorito', function (Blueprint $table) {
+            $table->bigIncrements('id_favorito');
+            $table->timestamps();
+        });
+
+        Schema::create('mensaje', function (Blueprint $table) {
+            $table->bigIncrements('id_mensaje');
+            $table->text('mensaje');
+            $table->timestamps();
+        });
+
+        Schema::create('usuario_has_favoritos', function (Blueprint $table) {
+            $table->foreignId('usuario_id')->constrained('users', 'id');
+            $table->foreignId('favorito_id_favorito')->constrained('favorito', 'id_favorito');
+            $table->timestamps();
+
+            $table->primary(['usuario_id', 'favorito_id_favorito']);
+        });
+
+        Schema::create('favorito_has_juego', function (Blueprint $table) {
+            $table->foreignId('favorito_id_favorito')->constrained('favorito', 'id_favorito');
+            $table->foreignId('juego_id_juego')->constrained('juego', 'id_juego');
+            $table->foreignId('juego_categoria_id_categoria')->constrained('categoria', 'id_categoria');
+            $table->timestamps();
+
+            $table->primary(['favorito_id_favorito', 'juego_id_juego', 'juego_categoria_id_categoria']);
+        });
+
+        Schema::create('usuario_has_mensaje', function (Blueprint $table) {
+            $table->foreignId('usuario_id')->constrained('users', 'id');
+            $table->foreignId('mensaje_id')->constrained('mensaje', 'id_mensaje');
+            $table->timestamps();
+
+            $table->primary(['usuario_id', 'mensaje_id']);
+        });
     }
 
     /**
@@ -29,5 +89,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('categoria');
+        Schema::dropIfExists('puntaje');
+        Schema::dropIfExists('juego');
+        Schema::dropIfExists('favorito');
+        Schema::dropIfExists('mensaje');
+        Schema::dropIfExists('usuario_has_favoritos');
+        Schema::dropIfExists('favorito_has_juego');
+        Schema::dropIfExists('usuario_has_mensaje');
     }
 };
