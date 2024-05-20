@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { RiStackFill } from "react-icons/ri";
+import HeaderButton from "../buttons/HeaderButton";
+import { GiCardAceSpades } from "react-icons/gi";
+import { ImClubs } from "react-icons/im";
+import { SiApplearcade } from "react-icons/si";
+import { MdCasino } from "react-icons/md";
+import { GiBrain } from "react-icons/gi";
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -14,8 +20,8 @@ const Header = () => {
   };
 
   return (
-    <div>
-      <header className="flex center between">
+    <header>
+      <div className="flex center between">
         <div>
           <img className="header-logo" src={logo} alt="Logo" />
         </div>
@@ -35,8 +41,15 @@ const Header = () => {
             {loggedIn ? "Cerrar sesión" : "Ingresar"}
           </button>
         </div>
-      </header>
-    </div>
+      </div>
+      <div className="flex evenly">
+          <HeaderButton text="Cartas" icon={<GiCardAceSpades />} />
+          <HeaderButton text="Suerte" icon={<ImClubs />} />
+          <HeaderButton text="Arcade" icon={<SiApplearcade />} />
+          <HeaderButton text="Mesa" icon={<MdCasino />} />
+          <HeaderButton text="Memoria" icon={<GiBrain />} />
+      </div>
+    </header>
   );
 };
 
