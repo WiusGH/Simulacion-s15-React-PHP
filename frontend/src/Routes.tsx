@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import Search from './pages/Search';
 import Categories from './pages/Categories';
 import Favorites from './pages/Favorites';
+import GameViewer from './pages/GameViewer';
 
 const Routess: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Routess: React.FC = () => {
         <Route path="/buscar" element={<Search />} />
         <Route path="/categorias" element={<Categories />} />
         <Route path="/favoritos" element={<Favorites />} />
+        <Route path="/jugar/simon" element={<GameViewer />} />
       </Routes>
     </Router>
   );
