@@ -1,3 +1,14 @@
 header {
   background-color: rgb(38, 38, 97);
+  padding: 0 30px;
+  .header-logo {
+    border-radius: 15px;
+    margin: 10px;
+  }
+}
+
+.navigation-button {
+  color: white;
+  font-size: 2rem;
+  margin: 20px;
 }
