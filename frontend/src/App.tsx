@@ -1,4 +1,4 @@
-import Routes from './Routes';
+import Routes from "./Routes";
 
 const App: React.FC = () => {
   return (
