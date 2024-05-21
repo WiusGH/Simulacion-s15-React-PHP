@@ -1,72 +1,105 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./Simon.css";
 
 const Simon = () => {
-  const [selectedColors, setSelectedColors] = useState<number[]>([]);
-  const [userInputs, setUserInputs] = useState<number[]>([]);
-  const [counter, setCounter] = useState(0);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [userInputEnabled, setUserInputEnabled] = useState(false);
+  const [selectedColors, setSelectedColors] = useState<number[]>([]); // Contador de colores generador aleatoriamente
+  const [userInputs, setUserInputs] = useState<number[]>([]); // Contador de colores introducidos por el usuario
+  const [counter, setCounter] = useState(0); // Contador de secuencias
+  const [gameStarted, setGameStarted] = useState(false); // Booleano para iniciar o parar el juego
+  const [userInputEnabled, setUserInputEnabled] = useState(false); // Booleano para habilitar o deshabilitar el input del usuario
+  const isPlayingSequence = useRef(false); // Booleano para evitar que se repita la secuencia
+  const resetRequested = useRef(false); // Booleano para asegurar que se detenga la secuencia al resetear el juego
 
   const delay = (ms: number) => {
-    return new Promise<void>((resolve) => setTimeout(resolve, ms));
+    return new Promise<void>((resolve) => setTimeout(resolve, ms)); // Función de retraso personalizada
   };
 
+  // Función para iniciar el juego
   const start = async () => {
     if (!gameStarted) {
+      // Resetea todos los contadores a 0
       setGameStarted(true);
       setSelectedColors([]);
       setUserInputs([]);
       setCounter(0);
-      await playSequence();
+      await addColorToSequence();
     } else {
-      setGameStarted(false);
-      setSelectedColors([]);
-      setUserInputs([]);
-      setCounter(0);
-    }
-  };
-
-  const playSequence = async () => {
-    setCounter((prevCounter) => prevCounter + 1);
-    const randomSelector = Math.ceil(Math.random() * 4);
-    setSelectedColors((prevSelectedColors) => [...prevSelectedColors, randomSelector]);
-    for (let i = 0; i < selectedColors.length; i++) {
-      await delay(600);
-    }
-    setUserInputEnabled(true); // Enable user input after the sequence is played
-  };
-
-
-  const handleUserInput = async (clickedColor: number) => {
-    setUserInputs((prevUserInputs) => [...prevUserInputs, clickedColor]);
-    const clickedColorId = document.getElementById(clickedColor.toString());
-    if (clickedColorId) {
-      clickedColorId.style.outline = "2px solid white";
-      await delay(100);
-      clickedColorId.style.outline = "none";
-    }
-    if (clickedColor !== selectedColors[userInputs.length - 1]) {
-      alert("Wrong! Game over.");
       resetGame();
-    } else {
-      if (userInputs.length === selectedColors.length) {
-        setUserInputs([]);
-        setCounter((prevCounter) => prevCounter + 1);
-        setUserInputEnabled(false); // Disable user input after the correct sequence is completed
-        setTimeout(playSequence, 1000);
+    }
+  };
+
+  // Agrega un color nuevo aleatorio a la secuencia y reproduce la secuencia
+  const addColorToSequence = async () => {
+    if (isPlayingSequence.current) return; // Verifica que no se este reproduciendo una secuencia y evita repeciones
+    isPlayingSequence.current = true; // Indica que se esta reproduciendo una secuencia
+    resetRequested.current = false;
+    const newColor = Math.ceil(Math.random() * 4);
+    const newSequence = [...selectedColors, newColor]; // Agrega el nuevo color a la secuencia
+    setSelectedColors(newSequence); 
+    setUserInputEnabled(false); // Deshabilita el input del usuario para evitar entorpecer la secuencia de juego
+    await playSequence(newSequence);
+    setUserInputEnabled(true); // Habilita el input del usuario una vez terminada la secuencia
+  };
+
+  // Reproduce una secuencia de colores
+  const playSequence = async (sequence: number[]) => {
+    setCounter((prevCounter) => prevCounter + 1); // Aumenta el contador en 1
+    for (let i = 0; i < sequence.length; i++) {
+      if (resetRequested.current) { // Si se ha solicitado resetear la secuencia, detiene la secuencia y sale de la función
+        isPlayingSequence.current = false;
+        return;
+      }
+      const colorId = sequence[i].toString(); // Obtiene el ID del color correspondiente
+      const colorElement = document.getElementById(colorId); // Obtiene el elemento HTML del color correspondiente
+      if (colorElement) {
+        colorElement.style.outline = "2px solid white"; // Agrega un borde temporal para indicar visualmente el color seleccionado
+        await delay(600);
+        colorElement.style.outline = "none"; // Elimina el borde temporal y pausa temporalmente la ejecución antes de mostrar el siguiente color
+        await delay(200);
       }
     }
+    isPlayingSequence.current = false; // Indica que ya no se esta reproduciendo una secuencia
   };
 
+  // Agrega colores seleccionados a la lista de inputs del usuario
+  const handleUserInput = async (clickedColor: number) => { // Recibe el color seleccionado por el usuario
+    if (!userInputEnabled) return; // Verifica que esté habilitado el input del usuario
+    setUserInputs((prevUserInputs) => {
+      const newInputs = [...prevUserInputs, clickedColor]; // Crea una lista nuevo con los inputs anteriores y el nuevo input
+      const clickedColorId = document.getElementById(clickedColor.toString());
+      if (clickedColorId) {
+        clickedColorId.style.outline = "2px solid white"; // Agregar un borde temporal para indicar al usuario la selección de color
+        delay(100).then(() => (clickedColorId.style.outline = "none"));
+      }
+      const isCorrect = newInputs.every((color, index) => color === selectedColors[index]); // Verifica que el input actual corresponda a la secuencia de colores
+      if (!isCorrect) {
+        document.body.style.backgroundColor = "red"; // Cambia temporalmente el fondo a rojo para indicarle al usuario que ha fallado
+        delay(200).then(() => (document.body.style.backgroundColor = "white"));
+        resetGame();
+      } else if (newInputs.length === selectedColors.length) { // Detecta cuando la cantidad de inputs es igual a la cantidad actual de colores selecionados
+        setUserInputs([]); // Resetea los inputs del usuario para la siguiente ronda
+        setUserInputEnabled(false); // Deshabilita temporalmente el input del usuario para permitir una nueva secuencia sin interrupciones
+        delay(1000).then(() => addColorToSequence());
+      }
+      return newInputs;
+    });
+  };
 
+  // Resetea todos los parámetros para permiti iniciar un nuevo juego
   const resetGame = () => {
+    resetRequested.current = true;
     setSelectedColors([]);
     setUserInputs([]);
     setCounter(0);
     setGameStarted(false);
-    userInputEnabled && setUserInputEnabled(false);
+    setUserInputEnabled(false);
+    isPlayingSequence.current = false;
   };
+
+  // TODO: implementar un contador temporal para indicar el puntaje máximo de la sesión actual
+  // TODO: implementar el envío del puntaje máximo al backend al fallar o resetar el juego
+  // TODO: obtener el puntaje máximo guardado en el backend y mostrarlo al cargar el juego
+  // FIX: reajustar el tamaño para que quepa cómodamente en pantallas más pequeñas
 
   return (
     <div className="flex column align">
@@ -75,12 +108,12 @@ const Simon = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="item yellow" id="1" onClick={() => handleUserInput(1)}></div>
-          <div className="item red" id="2" onClick={() => handleUserInput(2)}></div>
+          <div className={gameStarted ? "item pointer red" : "item red"} id="1" onClick={() => handleUserInput(1)}></div>
+          <div className={gameStarted ? "item pointer blue" : "item blue"} id="2" onClick={() => handleUserInput(2)}></div>
         </div>
         <div className="row">
-          <div className="item green" id="3" onClick={() => handleUserInput(3)}></div>
-          <div className="item blue" id="4" onClick={() => handleUserInput(4)}></div>
+          <div className={gameStarted ? "item pointer green" : "item green"} id="3" onClick={() => handleUserInput(3)}></div>
+          <div className={gameStarted ? "item pointer yellow" : "item yellow"} id="4" onClick={() => handleUserInput(4)}></div>
         </div>
       </div>
       <div className="button" id="start-button" onClick={start}>

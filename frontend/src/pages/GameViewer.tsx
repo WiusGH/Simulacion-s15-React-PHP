@@ -4,6 +4,8 @@ import MainContainer from "../components/containers/MainContainer"
 import Simon from "../components/games/Simon"
 
 const GameViewer = () => {
+
+  console.log({Simon})
   return (
     <div>
       <Header />
