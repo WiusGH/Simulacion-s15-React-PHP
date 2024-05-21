@@ -1,5 +1,11 @@
 import { useState, useRef } from "react";
 import "./Simon.css";
+import beep1 from '../../../public/sounds/simon/beep1.flac';
+import beep2 from '../../../public/sounds/simon/beep2.wav';
+import beep3 from '../../../public/sounds/simon/beep3.wav';
+import beep4 from '../../../public/sounds/simon/beep4.wav';
+import gameStart from '../../../public/sounds/simon/game-start.wav';
+import gameOver from '../../../public/sounds/simon/game-over.wav';
 
 const Simon = () => {
   const [selectedColors, setSelectedColors] = useState<number[]>([]); // Contador de colores generador aleatoriamente
@@ -14,14 +20,31 @@ const Simon = () => {
     return new Promise<void>((resolve) => setTimeout(resolve, ms)); // Función de retraso personalizada
   };
 
+  const colorSounds: { [key: number]: HTMLAudioElement } = {
+    1: new Audio(beep1.toString()),
+    2: new Audio(beep2.toString()),
+    3: new Audio(beep3.toString()),
+    4: new Audio(beep4.toString()),
+  };
+  const loseSound = new Audio(gameOver.toString());
+  const startSound = new Audio(gameStart.toString());
+
+  const playSound = (color: number) => {
+    if (userInputEnabled) {
+      colorSounds[color].play();
+    }
+  };
+
   // Función para iniciar el juego
   const start = async () => {
     if (!gameStarted) {
       // Resetea todos los contadores a 0
+      startSound.play();
       setGameStarted(true);
       setSelectedColors([]);
       setUserInputs([]);
       setCounter(0);
+      await delay(1000);
       await addColorToSequence();
     } else {
       resetGame();
@@ -49,6 +72,7 @@ const Simon = () => {
         isPlayingSequence.current = false;
         return;
       }
+      playSound(sequence[i]); // Reproduce el sonido correspondiente al color
       const colorId = sequence[i].toString(); // Obtiene el ID del color correspondiente
       const colorElement = document.getElementById(colorId); // Obtiene el elemento HTML del color correspondiente
       if (colorElement) {
@@ -63,6 +87,7 @@ const Simon = () => {
 
   // Agrega colores seleccionados a la lista de inputs del usuario
   const handleUserInput = async (clickedColor: number) => { // Recibe el color seleccionado por el usuario
+    playSound(clickedColor); // Reproduce el sonido correspondiente al color
     if (!userInputEnabled) return; // Verifica que esté habilitado el input del usuario
     setUserInputs((prevUserInputs) => {
       const newInputs = [...prevUserInputs, clickedColor]; // Crea una lista nuevo con los inputs anteriores y el nuevo input
@@ -73,6 +98,7 @@ const Simon = () => {
       }
       const isCorrect = newInputs.every((color, index) => color === selectedColors[index]); // Verifica que el input actual corresponda a la secuencia de colores
       if (!isCorrect) {
+        loseSound.play();
         document.body.style.backgroundColor = "red"; // Cambia temporalmente el fondo a rojo para indicarle al usuario que ha fallado
         delay(200).then(() => (document.body.style.backgroundColor = "white"));
         resetGame();
