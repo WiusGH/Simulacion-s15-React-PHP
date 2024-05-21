@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"; // Obtiene parámetros de la url
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import MainContainer from "../components/containers/MainContainer";
+import Error404 from "./Error404";
 import Simon from "../components/games/Simon";
 // Importar otros juegos a medida que se vayan creando
 
@@ -20,7 +21,7 @@ const GameViewer: React.FC = () => {
   // TODO: Crear página 404
   const selectedGame = game ? games[game.toLowerCase()] : undefined;
   if (!selectedGame) {
-    return <div>Game not found</div>;
+    return <Error404 />;
   }
 
   return (
