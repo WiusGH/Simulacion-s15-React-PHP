@@ -18,7 +18,7 @@ const Routess: React.FC = () => {
         <Route path="/buscar" element={<Search />} />
         <Route path="/categorias" element={<Categories />} />
         <Route path="/favoritos" element={<Favorites />} />
-        <Route path="/jugar/simon" element={<GameViewer />} />
+        <Route path="/jugar/:game" element={<GameViewer />} /> {/* Monta dinámicamente un juego según el URL introducido */}
       </Routes>
     </Router>
   );
