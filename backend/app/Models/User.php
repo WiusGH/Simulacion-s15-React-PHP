@@ -44,4 +44,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favoritos()
+    {
+        return $this->belongsToMany(Favorito::class, 'usuario_has_favoritos', 'usuario_id', 'favorito_id_favorito')
+                    ->withTimestamps();
+    }
+
+    public function mensajes()
+    {
+        return $this->belongsToMany(Mensaje::class, 'usuario_has_mensaje', 'usuario_id', 'mensaje_id')
+                    ->withTimestamps();
+    }
 }
