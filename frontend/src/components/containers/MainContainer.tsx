@@ -1,8 +1,12 @@
 import './MainContainer.css'
 
-const MainContainer = () => {
+const MainContainer = ({ game }: { game: React.ReactNode }) => {
+// const MainContainer = ({ game, sidebar }: { game: React.ReactNode, sidebar: React.ReactNode }) => {
   return (
-    <div>MainContainer</div>
+    <div className='flex center align main-container'>
+      {game}
+      {/*// Agregar sidebar a futuro */}
+    </div>
   )
 }
 

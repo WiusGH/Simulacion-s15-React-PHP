@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Header.css";
-import logo from "../../images/logo.png";
+import logo from "../../../public/images/logo.png";
 import { Link } from "react-router-dom";
 //import { IoIosStar } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
