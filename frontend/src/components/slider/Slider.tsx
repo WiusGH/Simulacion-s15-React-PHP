@@ -5,10 +5,10 @@ import "swiper/css/pagination";
 import "./Slider.css";
 import { Pagination } from "swiper/modules";
 import GameThumbnail from "../containers/GameThumbnail";'../containers/GameThumbnail.tsx'
-import ticTacToe from '../../images/tictactoe.png';
-import blackjack from '../../images/blackjack.png';
-import rps from '../../images/rps.png';
-import simon from '../../images/simon.png';
+import ticTacToe from '../../../public/images/tictactoe.png';
+import blackjack from '../../../public/images/blackjack.png';
+import rps from '../../../public/images/rps.png';
+import simon from '../../../public/images/simon.png';
 
 const Slider = () => {
 

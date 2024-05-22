@@ -7,6 +7,7 @@ import Search from './pages/Search';
 import Categories from './pages/Categories';
 import Favorites from './pages/Favorites';
 import GameViewer from './pages/GameViewer';
+import Error404 from './pages/Error404';
 
 const Routess: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const Routess: React.FC = () => {
         <Route path="/categorias" element={<Categories />} />
         <Route path="/favoritos" element={<Favorites />} />
         <Route path="/jugar/:game" element={<GameViewer />} /> {/* Monta dinámicamente un juego según el URL introducido */}
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
   );
