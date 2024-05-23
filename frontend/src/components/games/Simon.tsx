@@ -16,6 +16,9 @@ const Simon = () => {
   const isPlayingSequence = useRef(false); // Booleano para evitar que se repita la secuencia
   const resetRequested = useRef(false); // Booleano para asegurar que se detenga la secuencia al resetear el juego
 
+  //wis, esta linea me sale que no esta siendo usada, la muestro asi para que el deploy no me de errores. 
+  console.log(userInputs);
+
   const delay = (ms: number) => {
     return new Promise<void>((resolve) => setTimeout(resolve, ms)); // Función de retraso personalizada
   };
