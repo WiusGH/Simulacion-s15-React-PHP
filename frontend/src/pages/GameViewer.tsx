@@ -21,7 +21,8 @@ const GameViewer: React.FC = () => {
   // Muestra la página 404 al no encontrar el juego
   // TODO: Crear página 404
   const selectedGame = game ? games[game.toLowerCase()] : undefined;
-  const nameSelectedGame = selectedGame ? selectedGame.type.name : undefined;
+  const selectedGameName = game || "";
+
   if (!selectedGame) {
     return <Error404 />;
   }
@@ -31,7 +32,7 @@ const GameViewer: React.FC = () => {
       <Header />
       <div className="flex">
         <MainContainer game={selectedGame} /> {/* Muestra dinámicamente el juego seleccionado */}
-        <Sidebar game={nameSelectedGame} />
+        <Sidebar game={selectedGameName} />
       </div>
       <Footer />
     </div>
