@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "./Slider.css";
 import { Pagination } from "swiper/modules";
-import GameThumbnail from "../containers/GameThumbnail";'../containers/GameThumbnail.tsx'
+import GameThumbnail from "../containers/GameThumbnail"; '../containers/GameThumbnail.tsx'
 import ticTacToe from '../../../public/images/tictactoe.png';
 import blackjack from '../../../public/images/blackjack.png';
 import rps from '../../../public/images/rps.png';
@@ -12,41 +12,49 @@ import simon from '../../../public/images/simon.png';
 
 const Slider = () => {
 
-  const [games, setGames] = useState<{image: string, alt: string}[]>([]);
+  const [games, setGames] = useState<{ image: string, alt: string, url: string }[]>([]);
 
   useEffect(() => {
     setGames([
       {
         image: ticTacToe,
         alt: 'Tic tac toe',
+        url: '/jugar/tictactoe',
       },
       {
         image: blackjack,
         alt: 'Blackjack',
+        url: '/jugar/Blackjack',
       },
       {
         image: rps,
         alt: 'Rock Paper Scissors',
+        url: '/jugar/Rock Paper Scissors',
       },
       {
         image: simon,
         alt: 'Simon',
+        url: '/jugar/Simon'
       },
       {
         image: ticTacToe,
         alt: 'Tic tac toe',
+        url: '/jugar/Tic tac toe'
       },
       {
         image: blackjack,
         alt: 'Blackjack',
+        url: '/jugar/Blackjack'
       },
       {
         image: rps,
         alt: 'Rock Paper Scissors',
+        url: '/jugar/Rock Paper Scissors'
       },
       {
         image: simon,
         alt: 'Simon',
+        url: '/jugar/Simon'
       },
     ]);
   }, []);
@@ -64,7 +72,9 @@ const Slider = () => {
       >
         {games.map((game) => (
           <SwiperSlide key={game.alt}>
-            <GameThumbnail image={game.image.toString()} alt={game.alt.toString()} />
+            <a href={game.url}>
+              <GameThumbnail image={game.image.toString()} alt={game.alt.toString()} />
+            </a>
           </SwiperSlide>
         ))}
       </Swiper>
