@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import Search from "./pages/Search";
-import Categories from "./pages/Categories";
-import Favorites from "./pages/Favorites";
-=======
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
+//import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Search from './pages/Search';
 import Categories from './pages/Categories';
 import Favorites from './pages/Favorites';
 import GameViewer from './pages/GameViewer';
 import Error404 from './pages/Error404';
->>>>>>> origin/main
 
 const Routess: React.FC = () => {
   return (

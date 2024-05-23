@@ -1,0 +1,61 @@
+.InfoGameModal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.InfoGameModal-content {
+    background-color: rgb(38, 38, 97);
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+.InfoGameModal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+}
+
+.InfoGameModal-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.InfoGameModal-buttons .info-button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.InfoGameModal-buttons .info-button:hover {
+    background-color: #bbbaba;
+}
+
+.info-text {
+    margin-top: 20px;
+    color: #fff;
+}

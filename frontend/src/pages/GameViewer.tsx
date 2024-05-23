@@ -5,6 +5,7 @@ import Footer from "../components/footer/Footer";
 import MainContainer from "../components/containers/MainContainer";
 import Error404 from "./Error404";
 import Simon from "../components/games/Simon";
+import Sidebar from "../components/sidebar/SideBar";
 // Importar otros juegos a medida que se vayan creando
 
 
@@ -20,6 +21,7 @@ const GameViewer: React.FC = () => {
   // Muestra la página 404 al no encontrar el juego
   // TODO: Crear página 404
   const selectedGame = game ? games[game.toLowerCase()] : undefined;
+  const nameSelectedGame = selectedGame ? selectedGame.type.name : undefined;
   if (!selectedGame) {
     return <Error404 />;
   }
@@ -27,8 +29,10 @@ const GameViewer: React.FC = () => {
   return (
     <div>
       <Header />
-      <MainContainer game={selectedGame} /> {/* Muestra dinámicamente el juego seleccionado */}
-      {/* TODO: agregar sidebar */}
+      <div className="flex">
+        <MainContainer game={selectedGame} /> {/* Muestra dinámicamente el juego seleccionado */}
+        <Sidebar game={nameSelectedGame} />
+      </div>
       <Footer />
     </div>
   );
