@@ -12,9 +12,13 @@ class Puntaje extends Model
     protected $table = 'puntaje';
     protected $primaryKey = 'id_puntaje';
 
-    public function juegos()
+    public function usuario()
     {
-        return $this->hasMany(Juego::class, 'puntaje_id_puntaje');
+        return $this->belongsTo(User::class, 'usuario_id');
     }
-    
+
+    public function juego()
+    {
+        return $this->belongsTo(Juego::class, 'juego_id');
+    }
 }

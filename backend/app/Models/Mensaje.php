@@ -9,12 +9,15 @@ class Mensaje extends Model
 {
     use HasFactory;
 
-    protected $table = 'mensaje';
-    protected $primaryKey = 'id_mensaje';
+    protected $fillable = ['mensaje', 'sender_id', 'receiver_id'];
 
-    public function usuarios()
+    public function sender()
     {
-        return $this->belongsToMany(User::class, 'usuario_has_mensaje', 'mensaje_id', 'usuario_id')
-                    ->withTimestamps();
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(User::class, 'receiver_id');
     }
 }

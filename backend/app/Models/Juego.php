@@ -17,9 +17,9 @@ class Juego extends Model
         return $this->belongsTo(Categoria::class, 'categoria_id_categoria');
     }
 
-    public function puntaje()
+    public function puntajes()
     {
-        return $this->belongsTo(Puntaje::class, 'puntaje_id_puntaje');
+        return $this->hasMany(Puntaje::class, 'juego_id');
     }
 
     public function favoritos()

@@ -30,20 +30,26 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('puntaje', function (Blueprint $table) {
-            $table->bigIncrements('id_puntaje');
-            $table->integer('puntaje');
-            $table->string('comentario', 255)->nullable();
-            $table->timestamps();
-        });
-
         Schema::create('juego', function (Blueprint $table) {
             $table->bigIncrements('id_juego');
             $table->string('nombre', 255);
             $table->string('descripcion', 45);
             $table->foreignId('categoria_id_categoria')->constrained('categoria', 'id_categoria');
-            $table->foreignId('puntaje_id_puntaje')->constrained('puntaje', 'id_puntaje');
             $table->timestamps();
+        });
+
+        Schema::create('puntaje', function (Blueprint $table) {
+            $table->bigIncrements('id_puntaje');
+            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('juego_id');
+            $table->integer('puntaje');
+            $table->string('comentario', 255)->nullable();
+            $table->timestamps();
+
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('juego_id')->references('id_juego')->on('juego')->onDelete('cascade');
+
+            $table->unique(['usuario_id', 'juego_id']);
         });
 
         Schema::create('favorito', function (Blueprint $table) {
@@ -51,10 +57,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('mensaje', function (Blueprint $table) {
-            $table->bigIncrements('id_mensaje');
+        Schema::create('mensajes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
             $table->text('mensaje');
             $table->timestamps();
+
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('usuario_has_favoritos', function (Blueprint $table) {
@@ -74,13 +85,25 @@ return new class extends Migration
             $table->primary(['favorito_id_favorito', 'juego_id_juego', 'juego_categoria_id_categoria']);
         });
 
-        Schema::create('usuario_has_mensaje', function (Blueprint $table) {
-            $table->foreignId('usuario_id')->constrained('users', 'id');
-            $table->foreignId('mensaje_id')->constrained('mensaje', 'id_mensaje');
+        Schema::create('usuario_has_mensajes', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('mensaje_id')->constrained('mensajes');
             $table->timestamps();
 
-            $table->primary(['usuario_id', 'mensaje_id']);
+            $table->primary(['user_id', 'mensaje_id']);
         });
+
+        Schema::create('amistades', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('amigo_id');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('amigo_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->primary(['user_id', 'amigo_id']);
+        });
+
     }
 
     /**

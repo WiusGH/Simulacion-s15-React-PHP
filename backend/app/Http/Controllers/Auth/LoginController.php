@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\PersonalAccessTokenFactory;
+use Laravel\Sanctum\Sanctum;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+
+     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -26,7 +29,6 @@ class LoginController extends Controller
             }
         }
 
-        // Si las credenciales no coinciden o el usuario no existe, devuelve un error
         $errorMessage = trans('auth.failed');
         Log::error('Login failed. Error message: ' . $errorMessage);
         return response()->json(['message' => $errorMessage], 401);
@@ -35,6 +37,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $user = Auth::user();
+        
         Auth::logout();
 
         if ($user) {
