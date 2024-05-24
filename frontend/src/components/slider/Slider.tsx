@@ -9,6 +9,7 @@ import ticTacToe from '../../../public/images/tictactoe.png';
 import blackjack from '../../../public/images/blackjack.png';
 import rps from '../../../public/images/rps.png';
 import simon from '../../../public/images/simon.png';
+import bingo from '../../../public/images/bingo.png';
 
 const Slider = () => {
 
@@ -42,9 +43,9 @@ const Slider = () => {
         url: '/jugar/Tictactoe'
       },
       {
-        image: blackjack,
-        alt: 'Blackjack',
-        url: '/jugar/Blackjack'
+        image: bingo,
+        alt: 'Bingo',
+        url: '/jugar/Bingo'
       },
       {
         image: rps,

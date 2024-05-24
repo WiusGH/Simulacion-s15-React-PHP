@@ -7,6 +7,7 @@ import Error404 from "./Error404";
 import Simon from "../components/games/Simon";
 import Tateti from "../components/games/Tateti";
 import Sidebar from "../components/sidebar/SideBar";
+import Bingo from "../components/games/Bingo";
 // Importar otros juegos a medida que se vayan creando
 
 const GameViewer: React.FC = () => {
@@ -15,6 +16,7 @@ const GameViewer: React.FC = () => {
   const games: { [key: string]: JSX.Element } = {
     simon: <Simon />,
     tictactoe: <Tateti />,
+    bingo: <Bingo />,
     // Colocar acá los juegos que se vayan agregando
   };
 
