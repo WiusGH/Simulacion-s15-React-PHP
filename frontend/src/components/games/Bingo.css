@@ -1,0 +1,8 @@
+.bingo-container {
+    display: flex;
+}
+
+.bingo-board {
+    display: grid;
+    background-color: #f0f0f0;
+}
