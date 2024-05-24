@@ -6,6 +6,7 @@ import MainContainer from "../components/containers/MainContainer";
 import Error404 from "./Error404";
 import Simon from "../components/games/Simon";
 import Tateti from "../components/games/Tateti";
+import Blackjack from "../components/games/Blackjack";
 import Sidebar from "../components/sidebar/SideBar";
 import Bingo from "../components/games/Bingo";
 // Importar otros juegos a medida que se vayan creando
@@ -17,11 +18,11 @@ const GameViewer: React.FC = () => {
     simon: <Simon />,
     tictactoe: <Tateti />,
     bingo: <Bingo />,
+    blackjack: <Blackjack />,
     // Colocar acá los juegos que se vayan agregando
   };
 
   // Muestra la página 404 al no encontrar el juego
-  // TODO: Crear página 404
   const selectedGame = game ? games[game.toLowerCase()] : undefined;
   const selectedGameName = game || "";
 

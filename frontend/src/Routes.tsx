@@ -14,6 +14,7 @@ const Routess: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/registro" element={<SignUp />} />
+        <Route path="/ingreso" element={<SignIn />} />
         <Route path="/buscar" element={<Search />} />
         <Route path="/categorias" element={<Categories />} />
         <Route path="/favoritos" element={<Favorites />} />
