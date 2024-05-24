@@ -19,7 +19,7 @@ const Slider = () => {
       {
         image: ticTacToe,
         alt: 'Tic tac toe',
-        url: '/jugar/tictactoe',
+        url: '/jugar/Tictactoe',
       },
       {
         image: blackjack,
@@ -29,7 +29,7 @@ const Slider = () => {
       {
         image: rps,
         alt: 'Rock Paper Scissors',
-        url: '/jugar/Rock Paper Scissors',
+        url: '/jugar/RockPaperScissors',
       },
       {
         image: simon,
@@ -39,7 +39,7 @@ const Slider = () => {
       {
         image: ticTacToe,
         alt: 'Tic tac toe',
-        url: '/jugar/Tic tac toe'
+        url: '/jugar/Tictactoe'
       },
       {
         image: blackjack,
@@ -49,7 +49,7 @@ const Slider = () => {
       {
         image: rps,
         alt: 'Rock Paper Scissors',
-        url: '/jugar/Rock Paper Scissors'
+        url: '/jugar/RockPaperScissors'
       },
       {
         image: simon,

@@ -14,7 +14,7 @@ const GameViewer: React.FC = () => {
   const { game } = useParams<{ game: string }>();
   const games: { [key: string]: JSX.Element } = {
     simon: <Simon />,
-    tateti: <Tateti />,
+    tictactoe: <Tateti />,
     // Colocar acá los juegos que se vayan agregando
   };
 
