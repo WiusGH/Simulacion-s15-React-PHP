@@ -1,0 +1,9 @@
+.generic-button {
+  background-color: rgb(19, 184, 239);
+  border-radius: 25px;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px;
+  padding: 2px 20px;
+}
