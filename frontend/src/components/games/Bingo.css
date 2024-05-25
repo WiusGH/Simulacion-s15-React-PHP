@@ -1,8 +1,92 @@
-.bingo-container {
+.bingo-game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    gap: 30px;
+}
+
+.bingo-section-crupiers {
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    padding: 20px;
+    border: 2px solid #000;
+}
+
+.bingo-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+}
+
+.bingo-section-users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px solid #000;
+    background-color: #f9f9f9;
+}
+
+.bingo-section-random-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.bingo-row {
     display: flex;
 }
 
-.bingo-board {
-    display: grid;
-    background-color: #f0f0f0;
+.bingo-cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: 50%;
+    margin: 2px;
+    font-size: 18px;
+    background-color: #fff;
+}
+
+.bingo-cell.highlighted {
+    background-color: red;
+    color: white;
+}
+
+.update-button, .random-number-button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #9c9c9c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.update-button:hover, .random-number-button:hover {
+    background-color: #616161;
+}
+
+.win-message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
 }
