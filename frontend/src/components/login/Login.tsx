@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import style from "./Login.module.css";
 
 interface FormData {
   mail: string;
@@ -64,59 +65,44 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg w-full max-w-sm"
-      >
-        <h2 className="text-2xl font-bold mb-6">Ingresar</h2>
-        <div className="mb-4">
+    <div className={style.login}>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <h2 className={style.title}>Ingresar</h2>
+        <div className={style.box}>
           <input
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className={style.input}
             type="text"
             name="mail"
             placeholder="Ingrese su mail"
             onChange={handleChange}
           />
           {emptyEmailFieldError && (
-            <p className="text-red-500 text-sm mt-1">
-              Este campo no puede estar vacío
-            </p>
+            <p className={style.red}>Este campo no puede estar vacío</p>
           )}
         </div>
-        <div className="mb-4">
+        <div className={style.box}>
           <input
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className={style.input}
             type="password"
             name="password"
             placeholder="Contraseña"
             onChange={handleChange}
           />
           {emptyPasswordFieldError && (
-            <p className="text-red-500 text-sm mt-1">
-              Este campo no puede estar vacío
-            </p>
+            <p className={style.red}>Este campo no puede estar vacío</p>
           )}
         </div>
-        <div className="mb-6">
-          <button
-            type="submit"
-            className={`w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring ${
-              emptyPasswordFieldError || emptyEmailFieldError
-                ? "opacity-50 cursor-not-allowed"
-                : ""
-            }`}
-            disabled={emptyPasswordFieldError || emptyEmailFieldError}
-          >
+        <div className={style.box}>
+          <button type="submit" className={style.button}>
             Ingresar
           </button>
         </div>
-        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-        <div className="text-center">
+        {error && <p className={style.red}>{error}</p>}
+        <div className={style.text}>
           <p>¿No tenés cuenta?</p>
           <p>
             Registrate{" "}
-            <Link to={"/registro"} className="text-blue-500 hover:underline">
+            <Link to={"/registro"} className={style.link}>
               aquí
             </Link>
           </p>

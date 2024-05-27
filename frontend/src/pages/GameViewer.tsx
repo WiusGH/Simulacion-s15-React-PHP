@@ -16,7 +16,7 @@ const GameViewer: React.FC = () => {
   const { game } = useParams<{ game: string }>();
   const games: { [key: string]: JSX.Element } = {
     simon: <Simon />,
-    tictactoe: <Tateti />,
+    tateti: <Tateti />,
     bingo: <Bingo />,
     blackjack: <Blackjack />,
     // Colocar acá los juegos que se vayan agregando
@@ -34,7 +34,8 @@ const GameViewer: React.FC = () => {
     <div>
       <Header />
       <div className="flex">
-        <MainContainer game={selectedGame} /> {/* Muestra dinámicamente el juego seleccionado */}
+        <MainContainer game={selectedGame} />{" "}
+        {/* Muestra dinámicamente el juego seleccionado */}
         <Sidebar game={selectedGameName} />
       </div>
       <Footer />

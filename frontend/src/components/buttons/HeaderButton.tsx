@@ -1,13 +1,19 @@
-import './HeaderButton.css'
+import style from "./HeaderButton.module.css";
 
-const HeaderButton = ({text, icon}: {text: string, icon: React.ReactNode}) => {
+const HeaderButton = ({
+  text,
+  icon,
+}: {
+  text: string;
+  icon: React.ReactNode;
+}) => {
   return (
-    <div className='flex align header-button'>
+    <div className={style.headerButton}>
       {icon}
       &nbsp;
       {text}
     </div>
-  )
-}
+  );
+};
 
-export default HeaderButton
+export default HeaderButton;

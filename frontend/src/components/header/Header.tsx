@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./Header.css";
-import logo from "../../../public/images/logo.png";
+import style from "./Header.module.css";
+import logo from "../../../public/images/Logopng.png";
 import { Link } from "react-router-dom";
 //import { IoIosStar } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
@@ -30,29 +30,29 @@ const Header = () => {
   };*/
 
   return (
-    <header>
-      <div className="flex center between">
+    <header className={style.header}>
+      <div className={style.box}>
         <div>
-          <img className="header-logo" src={logo} alt="Logo" />
+          <img className={style.headerLogo} src={logo} alt="Logo" />
         </div>
-        <div className="navigation flex center align evenly">
-          <Link className="navigation-button" to="/">
+        <div className={style.navigation}>
+          <Link className={style.navigationButton} to="/">
             <RiStackFill />
           </Link>
-          <Link className="navigation-button" to="/">
+          <Link className={style.navigationButton} to="/">
             <FaMagnifyingGlass />
           </Link>
           {/*{loggedIn ? (
             <Link to="/favoritos">
-              <IoIosStar className="navigation-button" />
+              <IoIosStar className={style.navigationButton} />
             </Link>
           ) : null}*/}
-          <button className="navigation-button" onClick={openPopup}>
+          <button className={style.navigationButton} onClick={openPopup}>
             {/* {loggedIn ? "Cerrar sesión" : "*/}Ingresar{/*"}*/}
           </button>
         </div>
       </div>
-      <div className="flex evenly">
+      <div className={style.buttonBar}>
         <HeaderButton text="Cartas" icon={<GiCardAceSpades />} />
         <HeaderButton text="Suerte" icon={<ImClubs />} />
         <HeaderButton text="Arcade" icon={<SiApplearcade />} />

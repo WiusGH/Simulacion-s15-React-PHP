@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import style from "./Register.module.css";
 
 interface FormData {
   username: string;
@@ -57,16 +58,13 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
-      <p className="text-2xl font-bold mb-4">Registrate</p>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
-      >
-        <div className="space-y-4">
+    <div className={style.box}>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <p className={style.title}>Registrate</p>
+        <div className={style.flex}>
           <div>
             <input
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className={style.input}
               type="text"
               name="username"
               placeholder="Usuario"
@@ -74,9 +72,9 @@ const Register: React.FC = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="space-y-4">
+          <div className={style.flex}>
             <input
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className={style.input}
               type="password"
               name="password"
               placeholder="Contraseña"
@@ -85,7 +83,7 @@ const Register: React.FC = () => {
               onChange={handleChange}
             />
             <input
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className={style.input}
               type="password"
               name="passwordMatch"
               placeholder="Verifique su contraseña"
@@ -94,11 +92,11 @@ const Register: React.FC = () => {
             />
           </div>
           {!passwordsMatch && (
-            <p className="text-red-500 text-sm">Las contraseñas no coinciden</p>
+            <p className={style.red}>Las contraseñas no coinciden</p>
           )}
           <div>
             <input
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className={style.input}
               type="text"
               name="email"
               placeholder="Email"
@@ -107,17 +105,11 @@ const Register: React.FC = () => {
             />
           </div>
           <div>
-            <button
-              type="submit"
-              className={`w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring ${
-                !passwordsMatch ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              disabled={!passwordsMatch}
-            >
+            <button type="submit" className={style.button}>
               Registrate
             </button>
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className={style.red}>{error}</p>}
         </div>
       </form>
     </div>

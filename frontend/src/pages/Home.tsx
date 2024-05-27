@@ -1,16 +1,17 @@
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Slider from "../components/slider/Slider";
+import Title from "../components/slider/Title";
 
 const Home = () => {
   return (
     <div>
       <Header />
-      <h3>Top juegos</h3>
+      <Title text="Top juegos" />
       <Slider />
-      <h3>Juegos nuevos</h3>
+      <Title text="Juegos nuevos" />
       <Slider />
-      <h3>Juegos recomendados</h3>
+      <Title text="Juegos recomendados" />
       <Slider />
       <Footer />
     </div>
