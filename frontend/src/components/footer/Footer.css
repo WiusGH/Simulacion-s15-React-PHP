@@ -1,0 +1,23 @@
+footer {
+  background-color: rgb(38, 38, 97);
+  padding-bottom: 15px;
+  p {
+    color: white;
+  }
+}
+
+.links-container {
+  width: 90%;
+}
+
+.discless {
+  list-style: none;
+  color: white;
+  margin: 10px;
+}
+
+.footer-logo {
+  border-radius: 15px;
+  margin: 10px;
+  width: 20%;
+}
