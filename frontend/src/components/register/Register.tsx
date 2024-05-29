@@ -27,6 +27,7 @@ const Register: React.FC = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -34,7 +35,20 @@ const Register: React.FC = () => {
     setError(null);
     if (passwordsMatch) {
       try {
-        const response = await axios.post("http://.......", formData);
+        const csrfToken = document
+          .querySelector('meta[name="csrf-token"]')
+          ?.getAttribute("content");
+
+        const response = await axios.post(
+          "https://www.backendrestfulltest.icu/api/register",
+          formData,
+          {
+            headers: {
+              "X-CSRF-TOKEN": csrfToken,
+            },
+          }
+        );
+        console.log(response.data);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("id", response.data.id);
         navigate("/usuario");
