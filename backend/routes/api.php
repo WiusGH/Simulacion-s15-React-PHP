@@ -8,15 +8,19 @@ use App\Http\Controllers\PuntajeController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* Login-Logout-Register */
+/* Login-Logout-Register-Forgot Password */
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/register', [UsuarioController::class, 'createUser']);
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store']);
+Route::post('/reset-password', [NewPasswordController::class, 'store']);
 
 /* Usuarios */
 Route::get('/users', [UsuarioController::class, 'getAllUsers']);
