@@ -1,0 +1,14 @@
+.GameThumbnailContainer {
+  height: 250px;
+  width: 250px;
+  margin-bottom: 50px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: 5px solid black;
+    outline: 5px solid red;
+    padding: 10px;
+    margin: 5px;
+  }
+}
