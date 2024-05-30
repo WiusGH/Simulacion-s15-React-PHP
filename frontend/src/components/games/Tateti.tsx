@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import xImage from "../../../public/images/cruz.png";
 import oImage from "../../../public/images/circulo.png";
-import "./Tateti.css";
+import style from "./Tateti.module.css";
 
 type Player = "X" | "O" | null;
 
@@ -93,30 +93,28 @@ const Tateti: React.FC = () => {
   };
 
   return (
-    <div className="app">
-      <h1 className="title">Ta Te Ti</h1>
-      <div className="board">
+    <div className={style.app}>
+      <h1 className={style.title}>Ta Te Ti</h1>
+      <div className={style.board}>
         {board.map((cell, index) => (
-          <div key={index} className="cell" onClick={() => handleClick(index)}>
-            {cell && (
-              <img
-                src={cell === "X" ? xImage : oImage}
-                alt={cell}
-                className={`cell-image ${cell === "X" ? "x-color" : "o-color"}`}
-              />
-            )}
+          <div
+            key={index}
+            className={style.cell}
+            onClick={() => handleClick(index)}
+          >
+            {cell && <img src={cell === "X" ? xImage : oImage} alt={cell} />}
           </div>
         ))}
       </div>
       {winner && (
-        <p className="winner">
+        <p className={style.winner}>
           {winner === "X" ? "¡¡Ganaste!!" : "¡¡Perdiste!!"}
         </p>
       )}
       {!winner && !board.includes(null) && (
-        <p className="winner">Hemos empatado</p>
+        <p className={style.winner}>Hemos empatado</p>
       )}
-      <button className="reset-button" onClick={resetGame}>
+      <button className={style.resetButton} onClick={resetGame}>
         Reiniciar Juego
       </button>
     </div>
