@@ -9,11 +9,18 @@
   font-weight: bold;
   margin: 10px;
   padding: 2px 20px;
+  min-width: 15%;
   &:hover {
     cursor: pointer;
     transition: 0.5s;
     transform: scale(1.2);
     background-color: #a9a5b6;
     color: #36115a;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerButton {
+    min-width: 80%;
   }
 }

@@ -22,7 +22,7 @@ const Slider = () => {
       {
         image: ticTacToe,
         alt: "Tic tac toe",
-        url: "/jugar/Tictactoe",
+        url: "/jugar/Tateti",
       },
       {
         image: blackjack,
@@ -42,7 +42,7 @@ const Slider = () => {
       {
         image: ticTacToe,
         alt: "Tic tac toe",
-        url: "/jugar/Tictactoe",
+        url: "/jugar/Tateti",
       },
       {
         image: bingo,
