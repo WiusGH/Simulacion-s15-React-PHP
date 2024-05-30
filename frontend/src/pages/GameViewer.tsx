@@ -9,6 +9,7 @@ import Tateti from "../components/games/Tateti";
 import Blackjack from "../components/games/Blackjack";
 import Sidebar from "../components/sidebar/SideBar";
 import Bingo from "../components/games/Bingo";
+import Connect4 from "../components/games/Connect4";
 // Importar otros juegos a medida que se vayan creando
 
 const GameViewer: React.FC = () => {
@@ -18,7 +19,8 @@ const GameViewer: React.FC = () => {
     simon: <Simon />,
     tateti: <Tateti />,
     bingo: <Bingo />,
-    blackjack: <Blackjack />,
+    blackjack: <Blackjack />, 
+    connect4: <Connect4 />,
     // Colocar acá los juegos que se vayan agregando
   };
 
