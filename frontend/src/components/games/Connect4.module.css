@@ -41,3 +41,33 @@
   cursor: pointer;
   background-color: rgb(145, 47, 173);
 }
+
+.c4button {
+  background-color: purple;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.4rem;
+  padding: 5px 20px;
+  user-select: none;
+  &:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: rgb(145, 47, 173);
+  }
+}
+
+.yellow {
+  background-color: yellow;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-left: 10px;
+}
+
+.red {
+  background-color: red;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-left: 10px;
+}
