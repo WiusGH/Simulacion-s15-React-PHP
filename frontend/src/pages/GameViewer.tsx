@@ -11,6 +11,8 @@ import Sidebar from "../components/sidebar/SideBar";
 import Bingo from "../components/games/Bingo";
 import Weapon from "../components/games/arma-palabra/Weapon";
 import Quiz from "../components/games/quiz/Quiz";
+import TrucoGame from "../components/games/Truco";
+import Connect4 from "../components/games/Connect4";
 // Importar otros juegos a medida que se vayan creando
 
 const GameViewer: React.FC = () => {
@@ -23,9 +25,10 @@ const GameViewer: React.FC = () => {
     blackjack: <Blackjack />,
     armapalabra: <Weapon />,
     quiz: <Quiz />,
+    truco: <TrucoGame />,
+    connect4: <Connect4 />,
     // Colocar acá los juegos que se vayan agregando
   };
-
   // Muestra la página 404 al no encontrar el juego
   const selectedGame = game ? games[game.toLowerCase()] : undefined;
   const selectedGameName = game || "";

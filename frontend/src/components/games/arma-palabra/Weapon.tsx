@@ -151,12 +151,11 @@ const Weapon = () => {
             </div>
             <p>¿Qué palabra es?</p>
 
-            <div className="w-2/3 h-20 bg-purple-600/25 flex justify-evenly items-center">
+            <div className="w-full h-20 bg-[#b58ae0] flex justify-evenly items-center lg:w-2/3">
               {newWord.map((word, index) => (
                 <div
                   key={index}
-                  className="w-14 h-14 font-bold text-xl grid place-content-center bg-slate-100"
-                  draggable>
+                  className="w-9 h-9 font-bold text-xl grid place-content-center bg-white lg:w-14 lg:h-14">
                   {word}
                 </div>
               ))}
@@ -165,7 +164,7 @@ const Weapon = () => {
             <div className="h-28 flex flex-col justify-evenly items-center">
               <label
                 htmlFor="word"
-                className="h-11 relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                className=" h-11 relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
                 <input
                   type="text"
                   id="word"
