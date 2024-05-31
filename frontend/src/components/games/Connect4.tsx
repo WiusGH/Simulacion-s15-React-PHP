@@ -34,30 +34,69 @@ const Connect4 = () => {
   };
 
   const checkWinner = (board: string[][]) => {
-    for (let row = 0; row < 6; row++) {
-      for (let col = 0; col < 7; col++) {
-        if (
-          board[col][row] === "yellow" &&
-          board[col][row + 1] === "yellow" &&
-          board[col][row + 2] === "yellow" &&
-          board[col][row + 3] === "yellow"
-        ) {
-          setWinner("yellow");
-          console.log("Winner: " + winner);
-          return;
-        } else if (
-          board[col][row] === "red" &&
-          board[col][row + 1] === "red" &&
-          board[col][row + 2] === "red" &&
-          board[col][row + 3] === "red"
-        ) {
-          setWinner("red");
-          console.log("Winner: " + winner);
-          return;
+    const rows = 6;
+    const cols = 7;
+  
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const player = board[col][row];
+  
+        if (player) {
+          // Check horizontal
+          if (col + 3 < cols &&
+              board[col + 1][row] === player &&
+              board[col + 2][row] === player &&
+              board[col + 3][row] === player) {
+            setWinner(player as "red" | "yellow");
+            console.log("Winner: " + player);
+            return;
+          }
+  
+          // Check vertical
+          if (row + 3 < rows &&
+              board[col][row + 1] === player &&
+              board[col][row + 2] === player &&
+              board[col][row + 3] === player) {
+            setWinner(player as "red" | "yellow");
+            console.log("Winner: " + player);
+            return;
+          }
+  
+          // Check diagonal (bottom right)
+          if (col + 3 < cols && row + 3 < rows &&
+              board[col + 1][row + 1] === player &&
+              board[col + 2][row + 2] === player &&
+              board[col + 3][row + 3] === player) {
+            setWinner(player as "red" | "yellow");
+            console.log("Winner: " + player);
+            return;
+          }
+  
+          // Check diagonal (bottom left)
+          if (col - 3 >= 0 && row + 3 < rows &&
+              board[col - 1][row + 1] === player &&
+              board[col - 2][row + 2] === player &&
+              board[col - 3][row + 3] === player) {
+            setWinner(player as "red" | "yellow");
+            console.log("Winner: " + player);
+            return;
+          }
         }
       }
     }
   };
+  
+
+  // else if (
+  //   board[col][row] === "red" &&
+  //   board[col][row + 1] === "red" &&
+  //   board[col][row + 2] === "red" &&
+  //   board[col][row + 3] === "red"
+  // ) {
+  //   setWinner("red");
+  //   console.log("Winner: " + winner);
+  //   return;
+  // }
 
   const reset = () => {
     setGameStarted(false);
