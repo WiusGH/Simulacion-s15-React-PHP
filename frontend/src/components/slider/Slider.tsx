@@ -11,6 +11,7 @@ import blackjack from "../../../public/images/blackjack.png";
 import rps from "../../../public/images/rps.png";
 import simon from "../../../public/images/simon.png";
 import bingo from "../../../public/images/bingo.png";
+import connect4 from "../../../public/images/connect4.png"
 
 const Slider = () => {
   const [games, setGames] = useState<
@@ -30,9 +31,9 @@ const Slider = () => {
         url: "/jugar/Blackjack",
       },
       {
-        image: rps,
-        alt: "Rock Paper Scissors",
-        url: "/jugar/RockPaperScissors",
+        image: connect4,
+        alt: "4 en línea",
+        url: "/jugar/connect4",
       },
       {
         image: simon,
@@ -53,11 +54,6 @@ const Slider = () => {
         image: rps,
         alt: "Rock Paper Scissors",
         url: "/jugar/RockPaperScissors",
-      },
-      {
-        image: simon,
-        alt: "Simon",
-        url: "/jugar/Simon",
       },
     ]);
   }, []);
