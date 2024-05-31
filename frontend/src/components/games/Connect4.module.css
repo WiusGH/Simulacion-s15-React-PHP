@@ -39,5 +39,5 @@
 
 .selection:hover {
   cursor: pointer;
-  background-color: lightgreen;
+  background-color: rgb(145, 47, 173);
 }
