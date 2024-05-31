@@ -263,9 +263,10 @@ const Connect4 = () => {
     return (
       <div className={style.modalBackground}>
         <div className={style.modal}>
-          <div className={style.modalContent}>
+          <div className={style.modalContent + " " + "flex column"}>
             <p>{modalMessage}</p>
             <button className={style.c4button} onClick={reset}>Reinciar</button>
+            <button className={style.c4button} onClick={() => setShowModal(false)}>Ver tablero</button>
           </div>
         </div>
       </div>
