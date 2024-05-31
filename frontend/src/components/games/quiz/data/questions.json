@@ -1,0 +1,102 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "categoryName": "Cultura General",
+      "questions": [
+        {
+          "questionName": "¿Año en que el hombre llegó a la luna?",
+          "options": ["A) En 1956", "B) En 1987", "C) En 1969", "D) En 1970"],
+          "answer": "C"
+        },
+        {
+          "questionName": "¿Cuál no es un color primario?",
+          "options": ["A) Rojo", "B) Azul", "C) Amarillo", "D) Verde"],
+          "answer": "D"
+        },
+        {
+          "questionName": "¿Cuál es el océano más grande del mundo?",
+          "options": [
+            "A) Océano Índico",
+            "B) Océano Pacífico",
+            "C) Océano Atlántico",
+            "D) Océano Ártico"
+          ],
+          "answer": "B"
+        },
+        {
+          "questionName": "¿País con forma de bota?",
+          "options": ["A) Grecia", "B) Francia", "C) España", "D) Italia"],
+          "answer": "D"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "categoryName": "Tecnología",
+      "questions": [
+        {
+          "questionName": "¿Primera compañía en producir un teléfono de mano?",
+          "options": [
+            "A) SonyEricsson",
+            "B) Motorola",
+            "C) Samsung",
+            "D) Nokia"
+          ],
+          "answer": "B"
+        },
+        {
+          "questionName": "¿Empresa de software que desarrollo Illustrator?",
+          "options": ["A) Microsoft", "B) Apple", "C) Adobe Systems", "D) IBM"],
+          "answer": "C"
+        },
+        {
+          "questionName": "¿Compañia que inventó la primera cámara digital?",
+          "options": ["A) Kodak", "B) Nikon", "C) Olimpo", "D) Cannon"],
+          "answer": "A"
+        },
+        {
+          "questionName": "¿Qué país construyó la máquina Enigma?",
+          "options": [
+            "A) Estados Unidos",
+            "B) China",
+            "C) Japón",
+            "D) Alemania"
+          ],
+          "answer": "D"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "categoryName": "Geografía",
+      "questions": [
+        {
+          "questionName": "¿Capital de Corea del Sur?",
+          "options": ["A) Busan", "B) Jeju", "C) Gwangju", "D) Seúl"],
+          "answer": "D"
+        },
+        {
+          "questionName": "¿Capital de Reino Unido?",
+          "options": [
+            "A) Londres",
+            "B) Mánchester",
+            "C) Liverpool",
+            "D) Birmingham"
+          ],
+          "answer": "A"
+        },
+        {
+          "questionName": "¿En qué estado se encuentra Las Vegas?",
+          "options": ["A) Texas", "B) Nevada", "C) Florida", "D) California"],
+          "answer": "B"
+        },
+        {
+          "questionName": "¿En qué continente se encuentra Lituania?",
+          "options": ["A) Asia", "B) Ámerica", "C) Japón", "D) Europa"],
+          "answer": "D"
+        }
+      ]
+    }
+  ]
+}
