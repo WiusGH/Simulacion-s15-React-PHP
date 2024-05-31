@@ -1,0 +1,77 @@
+.cards {
+  display: flex;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.card img {
+  width: 100px;
+  height: 100%;
+  border: 1px solid #000;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.mesa {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.chat {
+  padding: 10px;
+  width: 350px;
+  height: 400px;
+  margin: auto 40px;
+}
+
+.chat2 {
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  background-color: #b58ae0;
+  border-radius: 15px;
+  margin: 10px 0;
+}
+
+.game {
+  display: flex;
+  gap: 30px;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+
+.button {
+  width: 110px;
+  font-size: 18px;
+  padding: 8px 10px;
+  background-color: #4f1b83;
+  color: #faf9f4;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+.button:hover {
+  background-color: #b58ae0;
+  color: #110d1b;
+  transition: 0.3s;
+}
