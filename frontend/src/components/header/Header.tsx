@@ -54,7 +54,7 @@ const Header = () => {
       </div>
       <div className={style.buttonBar}>
         <HeaderButton text="Cartas" icon={<GiCardAceSpades />} />
-        <HeaderButton text="Suerte" icon={<ImClubs />} />
+        <HeaderButton text="Estrategia" icon={<ImClubs />} />
         <HeaderButton text="Arcade" icon={<SiApplearcade />} />
         <HeaderButton text="Mesa" icon={<MdCasino />} />
         <HeaderButton text="Memoria" icon={<GiBrain />} />

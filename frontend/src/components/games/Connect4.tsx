@@ -33,30 +33,29 @@ const Connect4 = () => {
 
   // Coloca una ficha dependiendo de la columna seleccionada
   const handleClick = (column: number) => {
-  if (!gameStarted || winner) return; // Verifica que el juego esté inicializado y que no haya ganador
-  const newBoard = board.map((row) => row.slice()); // Copia el tablero actual
-  let moveMade = false; // Evita que se coloquen fichas demás en cada turno
-  // Busca el primer espacio vacío en la columna
-  for (let row = 5; row >= 0; row--) {
-    if (newBoard[column][row] === null) {
-      newBoard[column][row] = isPlayer1 ? "yellow" : "red";
-      setBoard(newBoard);
-      setCount((prevCount) => prevCount + 1);
-      moveMade = true;
-      break;
+    if (!gameStarted || winner) return; // Verifica que el juego esté inicializado y que no haya ganador
+    const newBoard = board.map((row) => row.slice()); // Copia el tablero actual
+    let moveMade = false; // Evita que se coloquen fichas demás en cada turno
+    // Busca el primer espacio vacío en la columna
+    for (let row = 5; row >= 0; row--) {
+      if (newBoard[column][row] === null) {
+        newBoard[column][row] = isPlayer1 ? "yellow" : "red";
+        setBoard(newBoard);
+        setCount((prevCount) => prevCount + 1);
+        moveMade = true;
+        break;
+      }
     }
-  }
-  if (moveMade) {
-    checkWinner(newBoard);
-    if (!winner) {
-      setIsPlayer1((prevIsPlayer1) => {
-        return !prevIsPlayer1;
-      });
+    if (moveMade) {
+      checkWinner(newBoard);
+      if (!winner) {
+        setIsPlayer1((prevIsPlayer1) => {
+          return !prevIsPlayer1;
+        });
+      }
     }
-  }
-};
+  };
 
-  
   // Asegura que se actualice la variable "isPlayer1" para ejecutar el algoritmo de la IA
   useEffect(() => {
     if (!isPlayer1 && singlePlayer.current) {
@@ -184,7 +183,7 @@ const Connect4 = () => {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const color = board[col][row];
-  
+
         if (color) {
           if (
             col + 3 < cols &&
@@ -228,15 +227,15 @@ const Connect4 = () => {
             setWinnerDetermined(true);
             return;
           }
-          console.log("count:", count);
-          // 41 en vez de 42 por la naturaleza de React al actualizar variables de estado
-          if (count === 41) {
-            setWinner("tie");
-            setWinnerDetermined(true);
-            return;
-          }
         }
       }
+    }
+    console.log("count:", count);
+    // 41 en vez de 42 por la naturaleza de React al actualizar variables de estado
+    if (count === 41) {
+      setWinner("tie");
+      setWinnerDetermined(true);
+      return;
     }
   };
   // Establece mensaje para el modal y lo muestra
@@ -270,8 +269,15 @@ const Connect4 = () => {
         <div className={style.modal}>
           <div className={style.modalContent + " " + "flex column"}>
             <p>{modalMessage}</p>
-            <button className={style.c4button} onClick={reset}>Reinciar</button>
-            <button className={style.c4button} onClick={() => setShowModal(false)}>Ver tablero</button>
+            <button className={style.c4button} onClick={reset}>
+              Reinciar
+            </button>
+            <button
+              className={style.c4button}
+              onClick={() => setShowModal(false)}
+            >
+              Ver tablero
+            </button>
           </div>
         </div>
       </div>
