@@ -15,10 +15,11 @@ const Routess: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/registro" element={<SignUp />} />
         <Route path="/buscar" element={<Search />} />
-        <Route path="/categorias" element={<Categories />} />
+        {/* Monta dinámicamente las categorías según el URL introducido */}
+        <Route path="/categorias/:category" element={<Categories />} />{" "}
         <Route path="/favoritos" element={<Favorites />} />
-        <Route path="/jugar/:game" element={<GameViewer />} />{" "}
         {/* Monta dinámicamente un juego según el URL introducido */}
+        <Route path="/jugar/:game" element={<GameViewer />} />{" "}
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
