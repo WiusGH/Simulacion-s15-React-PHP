@@ -33,26 +33,29 @@ const Connect4 = () => {
 
   // Coloca una ficha dependiendo de la columna seleccionada
   const handleClick = (column: number) => {
-    if (!gameStarted || winner) return; // Verifica que el juego esté inicializado y que no haya ganador
-    const newBoard = board.map((row) => row.slice()); // Copia el tablero actual
-    let moveMade = false; // Evita que se coloquen fichas demás en cada turno
-    // Busca el primer espacio vacío en la columna
-    for (let row = 5; row >= 0; row--) {
-      if (newBoard[column][row] === null) {
-        newBoard[column][row] = isPlayer1 ? "yellow" : "red";
-        setBoard(newBoard);
-        checkWinner(newBoard); // Check for winner after each move
-        setCount(count + 1);
-        moveMade = true;
-        break;
-      }
+  if (!gameStarted || winner) return; // Verifica que el juego esté inicializado y que no haya ganador
+  const newBoard = board.map((row) => row.slice()); // Copia el tablero actual
+  let moveMade = false; // Evita que se coloquen fichas demás en cada turno
+  // Busca el primer espacio vacío en la columna
+  for (let row = 5; row >= 0; row--) {
+    if (newBoard[column][row] === null) {
+      newBoard[column][row] = isPlayer1 ? "yellow" : "red";
+      setBoard(newBoard);
+      setCount((prevCount) => prevCount + 1);
+      moveMade = true;
+      break;
     }
-    if (moveMade) {
+  }
+  if (moveMade) {
+    checkWinner(newBoard);
+    if (!winner) {
       setIsPlayer1((prevIsPlayer1) => {
         return !prevIsPlayer1;
       });
     }
-  };
+  }
+};
+
   
   // Asegura que se actualice la variable "isPlayer1" para ejecutar el algoritmo de la IA
   useEffect(() => {
@@ -225,7 +228,9 @@ const Connect4 = () => {
             setWinnerDetermined(true);
             return;
           }
-          if (count === 42) {
+          console.log("count:", count);
+          // 41 en vez de 42 por la naturaleza de React al actualizar variables de estado
+          if (count === 41) {
             setWinner("tie");
             setWinnerDetermined(true);
             return;
@@ -299,6 +304,7 @@ const Connect4 = () => {
                 style={{ backgroundColor: cell }}
               ></div>
             ))}
+            {colIndex + 1}
           </div>
         ))}
       </div>

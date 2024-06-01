@@ -12,6 +12,7 @@ import rps from "../../../public/images/rps.png";
 import simon from "../../../public/images/simon.png";
 import bingo from "../../../public/images/bingo.png";
 import connect4 from "../../../public/images/connect4.png"
+import truco from "../../../public/images/cartas/12Copas.jpg"
 
 const Slider = () => {
   const [games, setGames] = useState<
@@ -41,11 +42,6 @@ const Slider = () => {
         url: "/jugar/Simon",
       },
       {
-        image: ticTacToe,
-        alt: "Tic tac toe",
-        url: "/jugar/Tateti",
-      },
-      {
         image: bingo,
         alt: "Bingo",
         url: "/jugar/Bingo",
@@ -54,6 +50,16 @@ const Slider = () => {
         image: rps,
         alt: "Rock Paper Scissors",
         url: "/jugar/RockPaperScissors",
+      },
+      {
+        image: truco,
+        alt: "Truco",
+        url: "/jugar/Truco",
+      },
+      {
+        image: "../public/images/ArmaLaPalabra.png",
+        alt: "Arma la palabra",
+        url: "/jugar/ArmaLaPalabra",
       },
     ]);
   }, []);
