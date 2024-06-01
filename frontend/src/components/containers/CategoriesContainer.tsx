@@ -1,5 +1,5 @@
 import React from 'react';
-import './CategoriesContainer.module.css';
+import style from './CategoriesContainer.module.css';
 import GameThumbnail from './GameThumbnail';
 
 interface Game {
@@ -15,7 +15,7 @@ interface CategoriesContainerProps {
 
 const CategoriesContainer: React.FC<CategoriesContainerProps> = ({ games }) => {
   return (
-    <div className='flex column'>
+    <div className={style.categoriesContainer + ' ' + 'flex column'}>
       {games.map((game, index) => (
         <a key={index} href={game.url}>
           <GameThumbnail image={game.image} alt={game.name} />

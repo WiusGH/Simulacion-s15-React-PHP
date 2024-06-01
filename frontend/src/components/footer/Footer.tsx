@@ -5,7 +5,7 @@ const footer = () => {
   return (
     <div>
       <footer className={style.footer}>
-        <img className={style.footerLogo} src={logo} alt="Logo" />
+        <a href="/"><img className={style.footerLogo} src={logo} alt="Logo" /></a>
         <p>©2024 Todos los derechos reservados</p>
       </footer>
     </div>

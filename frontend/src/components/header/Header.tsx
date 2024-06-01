@@ -33,7 +33,7 @@ const Header = () => {
     <header className={style.header}>
       <div className={style.box}>
         <div>
-          <img className={style.headerLogo} src={logo} alt="Logo" />
+          <a href="/"><img className={style.headerLogo} src={logo} alt="Logo" /></a>
         </div>
         <div className={style.navigation}>
           <Link className={style.navigationButton} to="/">
@@ -53,11 +53,11 @@ const Header = () => {
         </div>
       </div>
       <div className={style.buttonBar}>
-        <HeaderButton text="Cartas" icon={<GiCardAceSpades />} />
-        <HeaderButton text="Estrategia" icon={<ImClubs />} />
-        <HeaderButton text="Arcade" icon={<SiApplearcade />} />
-        <HeaderButton text="Mesa" icon={<MdCasino />} />
-        <HeaderButton text="Memoria" icon={<GiBrain />} />
+        <HeaderButton text="Cartas" icon={<GiCardAceSpades />} url="/categorias/cartas" />
+        <HeaderButton text="Estrategia" icon={<ImClubs />} url="/categorias/estrategia" />
+        <HeaderButton text="Arcade" icon={<SiApplearcade />} url="/categorias/arcade" />
+        <HeaderButton text="Mesa" icon={<MdCasino />} url="/categorias/mesa" />
+        <HeaderButton text="Memoria" icon={<GiBrain />} url="/categorias/memoria" />
       </div>
       <Modal isOpen={isOpen} onClose={closePopup}></Modal>
     </header>
