@@ -11,8 +11,9 @@ import blackjack from "../../../public/images/blackjack.png";
 import rps from "../../../public/images/rps.png";
 import simon from "../../../public/images/simon.png";
 import bingo from "../../../public/images/bingo.png";
-import connect4 from "../../../public/images/connect4.png"
-import truco from "../../../public/images/cartas/12Copas.jpg"
+import connect4 from "../../../public/images/connect4.png";
+import truco from "../../../public/images/truco.png";
+import palabra from "../../../public/images/palabra.jpeg";
 
 const Slider = () => {
   const [games, setGames] = useState<
@@ -57,7 +58,7 @@ const Slider = () => {
         url: "/jugar/Truco",
       },
       {
-        image: "../public/images/ArmaLaPalabra.png",
+        image: palabra,
         alt: "Arma la palabra",
         url: "/jugar/ArmaLaPalabra",
       },

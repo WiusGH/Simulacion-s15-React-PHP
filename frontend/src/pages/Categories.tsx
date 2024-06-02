@@ -11,7 +11,8 @@ import rps from "../../public/images/rps.png";
 import simon from "../../public/images/simon.png";
 import bingo from "../../public/images/bingo.png";
 import connect4 from "../../public/images/connect4.png";
-import truco from "../../public/images/cartas/12Copas.jpg";
+import truco from "../../public/images/truco.png";
+import palabra from "../../public/images/palabra.jpeg";
 
 interface Game {
   name: string;
@@ -21,13 +22,16 @@ interface Game {
 }
 
 const Categories: React.FC = () => {
-  const [gameCategories, setGameCategories] = useState<{ [key: string]: Game[] }>({
+  const [gameCategories, setGameCategories] = useState<{
+    [key: string]: Game[];
+  }>({
     cartas: [],
     estrategia: [],
     arcade: [],
     mesa: [],
     memoria: [],
     suerte: [],
+    quiz: [],
   });
 
   useEffect(() => {
@@ -74,6 +78,12 @@ const Categories: React.FC = () => {
         url: "/jugar/truco",
         categories: ["cartas", "estrategia", "mesa"],
       },
+      {
+        name: "Palabra",
+        image: palabra,
+        url: "/jugar/ArmaLaPalabra",
+        categories: ["quiz"],
+      },
     ];
 
     const newGameCategories: { [key: string]: Game[] } = {
@@ -83,6 +93,7 @@ const Categories: React.FC = () => {
       mesa: [],
       memoria: [],
       suerte: [],
+      quiz: [],
     };
 
     games.forEach((game) => {
