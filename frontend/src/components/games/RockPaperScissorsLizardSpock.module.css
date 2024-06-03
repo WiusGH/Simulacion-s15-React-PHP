@@ -1,0 +1,38 @@
+.container {
+  width: 95%;
+  outline: 2px solid black;
+  border-radius: 15px;
+  margin: 1% 0;
+  padding: 1%;
+}
+
+.hand {
+  font-size: 15rem;
+}
+
+.mirror {
+  transform: rotateY(180deg);
+}
+
+.rotateRight {
+  transform: rotate(90deg);
+}
+
+.rotateLeft {
+  transform: rotate(-90deg) rotateY(180deg);
+}
+
+.img {
+  width: 300px;
+  height: 300px;
+}
+
+.button {
+  margin: 5px;
+  line-height: 0;
+  padding: 0;
+}
+
+.dimmed {
+  opacity: 0.5;
+}

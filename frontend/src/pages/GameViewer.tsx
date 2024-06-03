@@ -13,6 +13,7 @@ import Weapon from "../components/games/arma-palabra/Weapon";
 import Quiz from "../components/games/quiz/Quiz";
 import TrucoGame from "../components/games/Truco";
 import Connect4 from "../components/games/Connect4";
+import RockPaperScissorsLizardSpock from "../components/games/RockPaperScissorsLizardSpock"
 // Importar otros juegos a medida que se vayan creando
 
 const GameViewer: React.FC = () => {
@@ -27,6 +28,7 @@ const GameViewer: React.FC = () => {
     quiz: <Quiz />,
     truco: <TrucoGame />,
     connect4: <Connect4 />,
+    piedrapapeltijeraslagartospock: <RockPaperScissorsLizardSpock />,
     // Colocar acá los juegos que se vayan agregando
   };
   // Muestra la página 404 al no encontrar el juego

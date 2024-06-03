@@ -65,7 +65,7 @@ const Categories: React.FC = () => {
       {
         name: "4 en línea",
         image: connect4,
-        url: "/jugar/4enlinea",
+        url: "/jugar/connect4",
         categories: ["estrategia", "mesa"],
       },
       {

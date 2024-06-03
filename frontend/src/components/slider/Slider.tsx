@@ -13,6 +13,7 @@ import simon from "../../../public/images/simon.png";
 import bingo from "../../../public/images/bingo.png";
 import connect4 from "../../../public/images/connect4.png"
 import truco from "../../../public/images/cartas/12Copas.jpg"
+import rpsls from "../../../public/images/rpsls/rpsls.jpg"
 
 const Slider = () => {
   const [games, setGames] = useState<
@@ -61,6 +62,16 @@ const Slider = () => {
         alt: "Arma la palabra",
         url: "/jugar/ArmaLaPalabra",
       },
+      {
+        image: "../public/images/Quiz.png",
+        alt: "Quiz",
+        url: "/jugar/Quiz",
+      },
+      {
+        image: rpsls,
+        alt: "Piedra, papel, tijeras, lagarto o Spock",
+        url: "/jugar/PiedraPapelTijerasLagartoSpock",
+      }
     ]);
   }, []);
 
