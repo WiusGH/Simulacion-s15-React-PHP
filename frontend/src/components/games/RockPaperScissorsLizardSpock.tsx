@@ -1,108 +1,156 @@
 import React, { useRef, useState } from "react";
 import style from "./RockPaperScissorsLizardSpock.module.css";
-import { FaHandRock, FaHandPaper, FaHandScissors, FaHandLizard, FaHandSpock } from 'react-icons/fa'
-import qm from "../../../public/images/rpsls/qm.png";
+import {
+  FaHandRock,
+  FaHandPaper,
+  FaHandScissors,
+  FaHandLizard,
+  FaHandSpock,
+} from "react-icons/fa";
+import { RxQuestionMarkCircled } from "react-icons/rx";
 import GenericButton from "../buttons/GenericButton";
+import { IconType } from "react-icons";
 
-const RockPaperScissorsLizardSpock = () => {
-  const [player1Choice, setPlayer1Choice] = useState("");
-  const [player2Choice, setPlayer2Choice] = useState("");
-  const [singlePlayer, setSinglePlayer] = useState(false);
-  const [result, setResult] = useState("");
-  const [isGameStarted, setIsGameStarted] = useState(false);
-  const choices = ["rock", "paper", "scissors", "lizard", "spock"];
-  const icons = [FaHandRock, FaHandPaper, FaHandScissors, FaHandLizard, FaHandSpock];
+const choices = ["rock", "paper", "scissors", "lizard", "spock"];
+const choiceIcons: { [key: string]: IconType } = {
+  rock: FaHandRock,
+  paper: FaHandPaper,
+  scissors: FaHandScissors,
+  lizard: FaHandLizard,
+  spock: FaHandSpock,
+};
+
+const winningConditions: { [key: string]: string[] } = {
+  rock: ["scissors", "lizard"],
+  paper: ["rock", "spock"],
+  scissors: ["paper", "lizard"],
+  lizard: ["spock", "paper"],
+  spock: ["scissors", "rock"],
+};
+
+const RockPaperScissorsLizardSpock: React.FC = () => {
+  const [player1Choice, setPlayer1Choice] = useState<string | null>(null);
+  const [player2Choice, setPlayer2Choice] = useState<string | null>(null);
+  const [result, setResult] = useState<string>("");
+  const [singlePlayer, setSinglePlayer] = useState<boolean>(false);
+  const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const ready = useRef(false);
 
   const start = (players: number) => {
-    setPlayer1Choice("");
-    setPlayer2Choice("");
+    ready.current = true;
+    setPlayer1Choice(null);
+    setPlayer2Choice(null);
     setResult("");
-    ready.current = false;
     setIsGameStarted(true);
-    if (players === 1) {
-      setSinglePlayer(true);
-    }
+    setSinglePlayer(players === 1);
   };
 
   const playersChoice = (choice: string, player: number) => {
     if (player === 1) {
       setPlayer1Choice(choice);
+      if (singlePlayer) {
+        const aiChosen = aiChoice();
+        setPlayer2Choice(aiChosen);
+        ready.current = true;
+        setWinner(choice, aiChosen);
+        setIsGameStarted(false);
+      } else if (player2Choice !== null) {
+        setWinner(player2Choice, choice);
+        ready.current = true;
+        setIsGameStarted(false);
+      }
     } else if (player === 2) {
       setPlayer2Choice(choice);
-      ready.current = true;
-    }
-    if (singlePlayer) {
-      setPlayer2Choice(aiChoice());
-      ready.current = true;
+      if (player1Choice !== null) {
+        setWinner(player1Choice, choice);
+        ready.current = true;
+        setIsGameStarted(false);
+      }
     }
   };
 
   const aiChoice = () => {
-    const aiChoice = choices[Math.floor(Math.random() * choices.length)];
-    return aiChoice;
+    return choices[Math.floor(Math.random() * choices.length)];
+  };
+
+  const setWinner = (choice1: string | null, choice2: string | null) => {
+    if (!choice1 || !choice2) return;
+
+    if (choice1 === choice2) {
+      setResult("Empate");
+    } else if (winningConditions[choice1].includes(choice2)) {
+      setResult("Gana jugador 1");
+    } else {
+      setResult("Gana jugador 2");
+    }
   };
 
   const reset = () => {
-    setPlayer1Choice("");
-    setPlayer2Choice("");
+    setPlayer1Choice(null);
+    setPlayer2Choice(null);
     setResult("");
     setIsGameStarted(false);
     setSinglePlayer(false);
     ready.current = false;
   };
 
+  const renderChoiceIcon = (choice: string | null, isPlayer1: boolean) => {
+  if (player1Choice !== null && player2Choice !== null && choice !== null) {
+    const IconComponent = choiceIcons[choice];
+    const rotateClass = isPlayer1
+      ? choice === "scissors" || choice === "lizard"
+        ? style.mirror
+        : style.rotateRight
+      : choice === "scissors" || choice === "lizard"
+      ? ""
+      : style.rotateLeft;
+    return <IconComponent className={`${style.hand} ${rotateClass}`} />;
+  } else return <RxQuestionMarkCircled className={style.hand} />;
+};
+
   return (
-    <div className={style.container + " " + "flex column align center"}>
+    <div className={`${style.container} flex column align center`}>
       <h1 className={style.title}>Piedra, Papel, Tijeras, Lagarto, Spock</h1>
-      <div className="flex center align around">
-        <div>
-          {player1Choice === "" ? <img className={style.img} src={qm} /> : null}
-          {player1Choice && isGameStarted && (
-                player1Choice === "rock"
-                  ? <FaHandRock className={style.hand + " " + style.rotateRight} />
-                  : player1Choice === "paper"
-                  ? <FaHandPaper className={style.hand + " " + style.rotateRight} />
-                  : player1Choice === "scissors"
-                  ? <FaHandScissors className={style.hand + " " + style.mirror} />
-                  : player1Choice === "lizard"
-                  ? <FaHandLizard className={style.hand + " " + style.mirror} />
-                  : player1Choice === "spock"
-                  ? <FaHandSpock className={style.hand + " " + style.rotateRight} />
-                  : qm
-          )}
+      <div className={style.innerContainer + " " + "flex center align evenly"}>
+        <div className={style.choiceContainer}>
+          {renderChoiceIcon(player1Choice, true)}
         </div>
         <div>VS.</div>
-        <div>
-          {player2Choice === "" ? <img className={style.img} src={qm} /> : null}
-          {player2Choice && isGameStarted && (
-                player2Choice === "rock"
-                  ? <FaHandRock className={style.hand + " " + style.rotateLeft} />
-                  : player2Choice === "paper"
-                  ? <FaHandPaper className={style.hand + " " + style.rotateLeft} />
-                  : player2Choice === "scissors"
-                  ? <FaHandScissors className={style.hand} />
-                  : player2Choice === "lizard"
-                  ? <FaHandLizard className={style.hand} />
-                  : player2Choice === "spock"
-                  ? <FaHandSpock className={style.hand + " " + style.rotateLeft} />
-                  : qm
-          )}
+        <div className={style.choiceContainer}>
+          {renderChoiceIcon(player2Choice, false)}
         </div>
       </div>
-      <div className="flex">
-        <div className={isGameStarted ? "flex" : style.dimmed + " " + "flex"}>
+      <div className={style.buttonsContainer}>
+      <div className={`${style.choiceButtons} flex center`}>
           {choices.map((choice, index) => (
-            <button className={style.button + " " + "flex align center" } key={index} onClick={() => playersChoice(choice, 1)}>{choice}</button >
+            <button
+              key={index}
+              className={player1Choice == null && ready.current ? `${style.button} flex align center` : `${style.button} ${style.disabled} flex align center`}
+              onClick={
+                isGameStarted && player1Choice == null ? () => playersChoice(choice, 1) : undefined
+              }
+            >
+              {choice}
+            </button>
           ))}
         </div>
-        <div className="flex">
-        {choices.map((choice, index) => (
-            <button className={style.button + " " + "flex align center" } key={index} onClick={() => playersChoice(choice, 2)}>{choice}</button >
+        <div className={`${style.choiceButtons} flex center`}>
+          {choices.map((choice, index) => (
+            <button
+              key={index}
+              className={player2Choice == null && ready.current ? `${style.button} flex align center` : `${style.button} ${style.disabled} flex align center`}
+              onClick={
+                isGameStarted && player2Choice == null ? () => playersChoice(choice, 2) : undefined
+              }
+            >
+              {choice}
+            </button>
           ))}
         </div>
       </div>
-      <div className="flex evenly">
+      <div
+        className={style.buttonsContainer + " " + "flex center align around"}
+      >
         {isGameStarted ? (
           <GenericButton text="Reiniciar" func={reset} />
         ) : (

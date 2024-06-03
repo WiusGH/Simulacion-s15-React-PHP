@@ -48,9 +48,9 @@ const Slider = () => {
         url: "/jugar/Bingo",
       },
       {
-        image: rps,
-        alt: "Rock Paper Scissors",
-        url: "/jugar/RockPaperScissors",
+        image: rpsls,
+        alt: "Piedra, papel, tijeras, lagarto o Spock",
+        url: "/jugar/PiedraPapelTijerasLagartoSpock",
       },
       {
         image: truco,
@@ -68,9 +68,9 @@ const Slider = () => {
         url: "/jugar/Quiz",
       },
       {
-        image: rpsls,
-        alt: "Piedra, papel, tijeras, lagarto o Spock",
-        url: "/jugar/PiedraPapelTijerasLagartoSpock",
+        image: rps,
+        alt: "Rock Paper Scissors",
+        url: "/jugar/RockPaperScissors",
       }
     ]);
   }, []);

@@ -31,6 +31,8 @@
   justify-content: space-evenly;
   align-items: center;
   @media (max-width: 768px) {
-    flex-direction: column;
+    display: block;
+    width: 60%;
+    margin: 0 auto;
   }
 }
