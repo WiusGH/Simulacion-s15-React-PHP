@@ -4,6 +4,7 @@ use App\Http\Controllers\AmistadController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\JuegoController;
+use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\PuntajeController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
@@ -58,6 +59,11 @@ Route::post('/amistad', [AmistadController::class, 'store']);
 Route::delete('/amistades/{id}', [AmistadController::class, 'eliminarAmistad']);
 
 /* Mensajes */
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('mensajes/{user1}/{user2}', [MensajeController::class, 'index']);
+    Route::post('mensajes', [MensajeController::class, 'store']);
+});
+
 /* (juegos) Favoritos */
 
 /* rutas adicionales */

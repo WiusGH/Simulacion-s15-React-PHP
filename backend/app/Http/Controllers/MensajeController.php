@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mensaje;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MensajeController extends Controller
 {
@@ -23,12 +24,17 @@ class MensajeController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'mensaje' => 'required|string',
+            'receiver_id' => 'required|exists:users,id',
+        ]);
+
         $mensaje = new Mensaje();
-        $mensaje->mensaje = $request->input('mensaje');
-        $mensaje->sender_id = auth()->user()->id;
-        $mensaje->receiver_id = $request->input('receiver_id');
+        $mensaje->mensaje = $validatedData['mensaje'];
+        $mensaje->sender_id = Auth::id();
+        $mensaje->receiver_id = $validatedData['receiver_id'];
         $mensaje->save();
 
-        return redirect()->back()->with('success', 'Mensaje enviado correctamente.');
+        return response()->json(['message' => 'Mensaje enviado correctamente.', 'data' => $mensaje], 201);
     }
 }
