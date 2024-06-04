@@ -5,17 +5,17 @@ import { RxQuestionMarkCircled } from "react-icons/rx";
 import GenericButton from "../buttons/GenericButton";
 import { IconType } from "react-icons";
 
-const choices = ["rock", "paper", "scissors"];
+const choices = ["piedra", "papel", "tijeras"];
 const choiceIcons: { [key: string]: IconType } = {
-  rock: FaHandRock,
-  paper: FaHandPaper,
-  scissors: FaHandScissors,
+  piedra: FaHandRock,
+  papel: FaHandPaper,
+  tijeras: FaHandScissors,
 };
 
 const winningConditions: { [key: string]: string[] } = {
-  rock: ["scissors"],
-  paper: ["rock"],
-  scissors: ["paper"],
+  piedra: ["scissors"],
+  papel: ["rock"],
+  tijeras: ["paper"],
 };
 
 const RockPaperScissors: React.FC = () => {
@@ -88,10 +88,10 @@ const RockPaperScissors: React.FC = () => {
     if (player1Choice !== null && player2Choice !== null && choice !== null) {
       const IconComponent = choiceIcons[choice];
       const rotateClass = isPlayer1
-        ? ["scissors"].includes(choice)
+        ? ["tijeras"].includes(choice)
           ? style.mirror
           : style.rotateRight
-        : ["scissors"].includes(choice)
+        : ["tijeras"].includes(choice)
         ? ""
         : style.rotateLeft;
       return <IconComponent className={`${style.hand} ${rotateClass}`} />;

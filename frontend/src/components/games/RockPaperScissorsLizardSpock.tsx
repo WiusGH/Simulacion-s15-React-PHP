@@ -11,20 +11,20 @@ import { RxQuestionMarkCircled } from "react-icons/rx";
 import GenericButton from "../buttons/GenericButton";
 import { IconType } from "react-icons";
 
-const choices = ["rock", "paper", "scissors", "lizard", "spock"];
+const choices = ["piedra", "papel", "tijeras", "lagarto", "spock"];
 const choiceIcons: { [key: string]: IconType } = {
-  rock: FaHandRock,
-  paper: FaHandPaper,
-  scissors: FaHandScissors,
-  lizard: FaHandLizard,
+  piedra: FaHandRock,
+  papel: FaHandPaper,
+  tijeras: FaHandScissors,
+  lagarto: FaHandLizard,
   spock: FaHandSpock,
 };
 
 const winningConditions: { [key: string]: string[] } = {
-  rock: ["scissors", "lizard"],
-  paper: ["rock", "spock"],
-  scissors: ["paper", "lizard"],
-  lizard: ["spock", "paper"],
+  piedra: ["scissors"],
+  papel: ["rock"],
+  tijeras: ["paper"],
+  lagarto: ["spock", "paper"],
   spock: ["scissors", "rock"],
 };
 
@@ -98,10 +98,10 @@ const RockPaperScissorsLizardSpock: React.FC = () => {
     if (player1Choice !== null && player2Choice !== null && choice !== null) {
       const IconComponent = choiceIcons[choice];
       const rotateClass = isPlayer1
-        ? ["scissors", "lizard"].includes(choice)
+        ? ["tijeras", "lagarto"].includes(choice)
           ? style.mirror
           : style.rotateRight
-        : ["scissors", "lizard"].includes(choice)
+        : ["tijeras", "lagarto"].includes(choice)
         ? ""
         : style.rotateLeft;
       return <IconComponent className={`${style.hand} ${rotateClass}`} />;
