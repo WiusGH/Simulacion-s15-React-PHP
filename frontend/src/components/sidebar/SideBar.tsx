@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RiInformation2Line } from "react-icons/ri";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import InfoGameButton from "../buttons/InfoGameButton";
@@ -8,11 +8,16 @@ const SideBar = ({ game }: { game: string }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleSidebar = () => {
+    console.log("Toggling sidebar, current state:", expanded);
     setExpanded(!expanded);
   };
 
+  useEffect(() => {
+    console.log("Sidebar updated, expanded:", expanded);
+  }, [expanded]);
+
   return (
-    <div className={`${style.sidebar} ${expanded ? "expanded" : ""}`}>
+    <div className={`${style.sidebar} ${expanded ? "style.expanded" : ""}`}>
       <div className={style.sidebarHandle} onClick={toggleSidebar}>
         <span>
           <FaCircleArrowLeft />

@@ -1,5 +1,6 @@
 .cards {
   display: flex;
+  justify-content: center;
   cursor: pointer;
   gap: 10px;
 }
@@ -14,8 +15,20 @@
 
 .mesa {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   margin-top: 20px;
+  background-image: url("../../../public/images/mesa.jpg");
+  width: 450px;
+  height: 400px;
+}
+
+.mesa-computadora,
+.mesa-jugador {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .chat {
