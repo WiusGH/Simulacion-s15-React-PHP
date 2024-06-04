@@ -48,6 +48,11 @@ const Slider = () => {
         url: "/jugar/Bingo",
       },
       {
+        image: rps,
+        alt: "Rock Paper Scissors",
+        url: "/jugar/PiedraPapelTijeras",
+      },
+      {
         image: rpsls,
         alt: "Piedra, papel, tijeras, lagarto o Spock",
         url: "/jugar/PiedraPapelTijerasLagartoSpock",
@@ -66,11 +71,6 @@ const Slider = () => {
         image: "../public/images/Quiz.png",
         alt: "Quiz",
         url: "/jugar/Quiz",
-      },
-      {
-        image: rps,
-        alt: "Rock Paper Scissors",
-        url: "/jugar/RockPaperScissors",
       }
     ]);
   }, []);

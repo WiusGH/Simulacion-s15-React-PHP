@@ -1,34 +1,24 @@
 import React, { useRef, useState } from "react";
 import style from "./RockPaperScissorsLizardSpock.module.css";
-import {
-  FaHandRock,
-  FaHandPaper,
-  FaHandScissors,
-  FaHandLizard,
-  FaHandSpock,
-} from "react-icons/fa";
+import { FaHandRock, FaHandPaper, FaHandScissors } from "react-icons/fa";
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import GenericButton from "../buttons/GenericButton";
 import { IconType } from "react-icons";
 
-const choices = ["rock", "paper", "scissors", "lizard", "spock"];
+const choices = ["rock", "paper", "scissors"];
 const choiceIcons: { [key: string]: IconType } = {
   rock: FaHandRock,
   paper: FaHandPaper,
   scissors: FaHandScissors,
-  lizard: FaHandLizard,
-  spock: FaHandSpock,
 };
 
 const winningConditions: { [key: string]: string[] } = {
-  rock: ["scissors", "lizard"],
-  paper: ["rock", "spock"],
-  scissors: ["paper", "lizard"],
-  lizard: ["spock", "paper"],
-  spock: ["scissors", "rock"],
+  rock: ["scissors"],
+  paper: ["rock"],
+  scissors: ["paper"],
 };
 
-const RockPaperScissorsLizardSpock: React.FC = () => {
+const RockPaperScissors: React.FC = () => {
   const [player1Choice, setPlayer1Choice] = useState<string | null>(null);
   const [player2Choice, setPlayer2Choice] = useState<string | null>(null);
   const [result, setResult] = useState<string>("");
@@ -98,10 +88,10 @@ const RockPaperScissorsLizardSpock: React.FC = () => {
     if (player1Choice !== null && player2Choice !== null && choice !== null) {
       const IconComponent = choiceIcons[choice];
       const rotateClass = isPlayer1
-        ? ["scissors", "lizard"].includes(choice)
+        ? ["scissors"].includes(choice)
           ? style.mirror
           : style.rotateRight
-        : ["scissors", "lizard"].includes(choice)
+        : ["scissors"].includes(choice)
         ? ""
         : style.rotateLeft;
       return <IconComponent className={`${style.hand} ${rotateClass}`} />;
@@ -112,7 +102,7 @@ const RockPaperScissorsLizardSpock: React.FC = () => {
 
   return (
     <div className={`${style.container} flex column align center`}>
-      <h1 className={style.title}>Piedra, Papel, Tijeras, Lagarto, Spock</h1>
+      <h1 className={style.title}>Piedra, Papel, Tijeras</h1>
       <div className={`${style.innerContainer} flex center align evenly`}>
         <div className={style.choiceContainer}>
           {renderChoiceIcon(player1Choice, true)}
@@ -172,4 +162,4 @@ const RockPaperScissorsLizardSpock: React.FC = () => {
   );
 };
 
-export default RockPaperScissorsLizardSpock;
+export default RockPaperScissors;

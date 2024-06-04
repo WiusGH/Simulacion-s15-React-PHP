@@ -5,13 +5,14 @@ import Footer from "../components/footer/Footer";
 import CategoriesContainer from "../components/containers/CategoriesContainer";
 
 import Error404 from "./Error404";
-import ticTacToe from "../../public/images/tictactoe.png";
-import blackjack from "../../public/images/blackjack.png";
-import rps from "../../public/images/rps.png";
-import simon from "../../public/images/simon.png";
-import bingo from "../../public/images/bingo.png";
-import connect4 from "../../public/images/connect4.png";
-import truco from "../../public/images/cartas/12Copas.jpg";
+import ticTacToe from "/public/images/tictactoe.png";
+import blackjack from "/public/images/blackjack.png";
+import rps from "/public/images/rps.png";
+import rpsls from "/public/images/rpsls/rpsls.jpg";
+import simon from "/public/images/simon.png";
+import bingo from "/public/images/bingo.png";
+import connect4 from "/public/images/connect4.png";
+import truco from "/public/images/cartas/12Copas.jpg";
 
 interface Game {
   name: string;
@@ -48,6 +49,12 @@ const Categories: React.FC = () => {
         name: "Rock, Paper, Scissors",
         image: rps,
         url: "/jugar/PiedraPapelTijeras",
+        categories: ["estrategia", "suerte"],
+      },
+      {
+        name: "Rock, Paper, Scissors, Lizard, Spock",
+        image: rpsls,
+        url: "/jugar/PiedraPapelTijerasLagartoSpock",
         categories: ["estrategia", "suerte"],
       },
       {
