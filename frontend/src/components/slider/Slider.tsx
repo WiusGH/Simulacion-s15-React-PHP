@@ -65,11 +65,7 @@ const Slider = () => {
         url: "/jugar/Truco",
       },
       {
-<<<<<<< HEAD
-        image: palabra,
-=======
         image: arma,
->>>>>>> origin/juegos-arma-palabra-quiz
         alt: "Arma la palabra",
         url: "/jugar/ArmaLaPalabra",
       },
@@ -78,14 +74,6 @@ const Slider = () => {
         alt: "Quiz",
         url: "/jugar/Quiz",
       },
-<<<<<<< HEAD
-=======
-      {
-        image: rps,
-        alt: "Rock Paper Scissors",
-        url: "/jugar/RockPaperScissors",
-      },
->>>>>>> origin/juegos-arma-palabra-quiz
     ]);
   }, []);
 
