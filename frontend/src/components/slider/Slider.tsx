@@ -15,6 +15,7 @@ import connect4 from "../../../public/images/connect4.png";
 import truco from "../../../public/images/cartas/12Copas.jpg";
 import rpsls from "../../../public/images/rpsls/rpsls.jpg";
 import palabra from "../../../public/images/palabra.jpeg";
+import quiz from "../../../public/images/quiz.png";
 
 const Slider = () => {
   const [games, setGames] = useState<
@@ -64,15 +65,27 @@ const Slider = () => {
         url: "/jugar/Truco",
       },
       {
+<<<<<<< HEAD
         image: palabra,
+=======
+        image: arma,
+>>>>>>> origin/juegos-arma-palabra-quiz
         alt: "Arma la palabra",
         url: "/jugar/ArmaLaPalabra",
       },
       {
-        image: "../public/images/Quiz.png",
+        image: quiz,
         alt: "Quiz",
         url: "/jugar/Quiz",
       },
+<<<<<<< HEAD
+=======
+      {
+        image: rps,
+        alt: "Rock Paper Scissors",
+        url: "/jugar/RockPaperScissors",
+      },
+>>>>>>> origin/juegos-arma-palabra-quiz
     ]);
   }, []);
 
@@ -107,8 +120,7 @@ const Slider = () => {
             spaceBetween: 30,
           },
         }}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {games.map((game) => (
           <SwiperSlide key={game.alt}>
             <a href={game.url}>
