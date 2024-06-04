@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import style from "./Connect4.module.css";
+import Swal from "sweetalert2";
 
 // Valores para mostrar el ganador o empate
 type Winner = null | "red" | "yellow" | "tie";
@@ -262,27 +263,23 @@ const Connect4 = () => {
     singlePlayer.current = false;
   };
 
-  // Mensaje para el modal
-  const Modal = () => {
-    return (
-      <div className={style.modalBackground}>
-        <div className={style.modal}>
-          <div className={style.modalContent + " " + "flex column"}>
-            <p>{modalMessage}</p>
-            <button className={style.c4button} onClick={reset}>
-              Reinciar
-            </button>
-            <button
-              className={style.c4button}
-              onClick={() => setShowModal(false)}
-            >
-              Ver tablero
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  useEffect(() => {
+    if (winner) {
+      Swal.fire({
+        title: winner === "tie" ? "¡Es un empate!" : `¡El jugador ${winner === "yellow" ? "amarillo" : "rojo"} gana!`,
+        color: "black",
+        showCancelButton: true,
+        confirmButtonText: "Jugar de nuevo",
+        confirmButtonColor: "purple",
+        cancelButtonText: "Ver tablero",
+        cancelButtonColor: "purple",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          start(singlePlayer.current ? 1 : 2);
+        }
+      });
+    }
+  }, [winner]);
 
   return (
     <div className={style.container}>
@@ -340,8 +337,8 @@ const Connect4 = () => {
           </>
         )}
       </div>
-      {/* Modal */}
-      {showModal && winnerDetermined && <Modal />}
+      {/* Modal
+      {showModal && winnerDetermined && <Modal />} */}
     </div>
   );
 };

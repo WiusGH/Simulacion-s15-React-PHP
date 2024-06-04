@@ -3,6 +3,7 @@ import "./Blackjack.css";
 import axios from "axios";
 import cardBack from "../../../public/images/cardBack.png";
 import GenericButton from "../buttons/GenericButton";
+import Swal from "sweetalert2";
 
 interface Card {
   code: string;
@@ -37,7 +38,7 @@ const Blackjack = () => {
     }
   };
 
-  // Obtieneun mazo al cargar la página
+  // Obtiene un mazo al cargar la página
   useEffect(() => {
     newDeck();
   }, []);
@@ -48,7 +49,6 @@ const Blackjack = () => {
       try {
         const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=4`);
         const cards = response.data.cards;
-        // TODO: detectar si el jugador o la casa obtiene un Blacjack al iniciar
         setPlayerCards([cards[0], cards[1]]);
         setDealerCards([cards[2], cards[3]]);
         calculateScores([cards[0], cards[1]], [cards[2], cards[3]]);
@@ -60,7 +60,7 @@ const Blackjack = () => {
 
   // Obtiene una carta extra para el jugador
   const drawCard = async () => {
-    if (deck) {
+    if (deck && !gameOver && playerScore <= 21) {
       try {
         const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`);
         const newCard = response.data.cards[0];
@@ -100,8 +100,16 @@ const Blackjack = () => {
         });
       return score;
     };
-    setPlayerScore(calculateScore(playerCards));
-    setDealerScore(calculateScore(dealerCards));
+    const playerTotal = calculateScore(playerCards);
+    const dealerTotal = calculateScore(dealerCards);
+
+    setPlayerScore(playerTotal);
+    setDealerScore(dealerTotal);
+
+    // End the game if player exceeds 21
+    if (playerTotal > 21) {
+      setGameOver(true);
+    }
   };
 
   // Inicia el juego, reinicia las manos y puntajes y reparte nuevamente
@@ -123,35 +131,46 @@ const Blackjack = () => {
     setGameOver(true);
   };
 
-  // TODO: Acomodar lógica de puntajes ya que no se están sumando bien
+  // Verifica las puntuaciones para determinar el ganador
   const checkScores = async () => {
-    console.log("Player score:", playerScore);
-    console.log("Dealer score:", dealerScore);
-    if (dealerScore < 17 && deck) {
+    let finalDealerScore = dealerScore;
+
+    // Draw cards for the dealer until they reach 17 or higher
+    while (finalDealerScore < 17 && deck) {
       try {
         const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=1`);
         const newCard = response.data.cards[0];
         setDealerCards(prevCards => {
           const updatedCards = [...prevCards, newCard];
           calculateScores(playerCards, updatedCards);
+          finalDealerScore = updatedCards.reduce((acc, card) => acc + getCardValue(card), 0);
           return updatedCards;
         });
       } catch (error) {
         console.error("Error drawing card:", error);
       }
     }
-
-    if (dealerScore > 21) {
-      alert("¡El jugador gana!");
+    let winner = null;
+    // Determine the winner
+    if (finalDealerScore > 21) {
+      winner = "¡El jugador gana!";
     } else if (playerScore > 21) {
-      alert("¡La casa gana!");
-    } else if (dealerScore > playerScore) {
-      alert("¡La casa gana!");
-    } else if (dealerScore < playerScore) {
-      alert("¡El jugador gana!");
+      winner = "¡El dealer gana!";
+    } else if (finalDealerScore > playerScore) {
+      winner = "¡El dealer gana!";
+    } else if (finalDealerScore < playerScore) {
+      winner = "¡El jugador gana!";
     } else {
-      alert("¡Empate!");
+      winner = "¡Empate!";
     }
+    Swal.fire({
+      position: "center",
+      title: winner,
+      color: "black",
+      timer: 2000,
+      showConfirmButton: true,
+      confirmButtonColor: "purple",
+    });
   };
 
   return (
@@ -160,7 +179,7 @@ const Blackjack = () => {
       <div className="flex align cards">
         <p>Dealer:</p>
         {gameOver ? dealerCards.map((card: Card, index: number) => (
-          <img key={index} src={card.image} alt={card.value} className="card" />)): (gameStarted ? (
+          <img key={index} src={card.image} alt={card.value} className="card" />)) : (gameStarted ? (
           <>
             <img src={cardBack} alt="Card Back" className="card" />
             {dealerCards.length > 1 && (
@@ -202,3 +221,4 @@ const Blackjack = () => {
 };
 
 export default Blackjack;
+

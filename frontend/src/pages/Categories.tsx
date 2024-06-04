@@ -14,6 +14,7 @@ import bingo from "../../public/images/bingo.png";
 import connect4 from "../../public/images/connect4.png";
 import truco from "../../public/images/truco.png";
 import palabra from "../../public/images/palabra.jpeg";
+import quiz from "../../public/images/quiz.png";
 
 interface Game {
   name: string;
@@ -41,7 +42,7 @@ const Categories: React.FC = () => {
         name: "Tateti",
         image: ticTacToe,
         url: "/jugar/tateti",
-        categories: ["estrategia"],
+        categories: ["estrategia", "arcade"],
       },
       {
         name: "Blackjack",
@@ -50,16 +51,16 @@ const Categories: React.FC = () => {
         categories: ["cartas", "mesa"],
       },
       {
-        name: "Rock, Paper, Scissors",
+        name: "Piedra, papel o tijeras",
         image: rps,
         url: "/jugar/PiedraPapelTijeras",
-        categories: ["estrategia", "suerte"],
+        categories: ["estrategia", "suerte", "arcade"],
       },
       {
-        name: "Rock, Paper, Scissors, Lizard, Spock",
+        name: "Piedra, papel, tijeras, lagarto o Spock",
         image: rpsls,
         url: "/jugar/PiedraPapelTijerasLagartoSpock",
-        categories: ["estrategia", "suerte"],
+        categories: ["estrategia", "suerte", "arcade"],
       },
       {
         name: "Simon",
@@ -77,7 +78,7 @@ const Categories: React.FC = () => {
         name: "4 en línea",
         image: connect4,
         url: "/jugar/connect4",
-        categories: ["estrategia", "mesa"],
+        categories: ["estrategia", "mesa", "arcade"],
       },
       {
         name: "Truco",
@@ -86,9 +87,15 @@ const Categories: React.FC = () => {
         categories: ["cartas", "estrategia", "mesa"],
       },
       {
-        name: "Palabra",
+        name: "Arma la palabra",
         image: palabra,
         url: "/jugar/ArmaLaPalabra",
+        categories: ["quiz"],
+      },
+      {
+        name: "Quiz",
+        image: quiz,
+        url: "/jugar/Quiz",
         categories: ["quiz"],
       },
     ];
@@ -124,7 +131,7 @@ const Categories: React.FC = () => {
   return (
     <div>
       <Header />
-      <div className="flex column">
+      <div className="flex center">
         {/* Render dynamically the games according to the category */}
         <CategoriesContainer games={selectedCategoryGames} />
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import xImage from "../../../public/images/cruz.png";
 import oImage from "../../../public/images/circulo.png";
 import style from "./Tateti.module.css";
+import Swal from "sweetalert2";
 
 type Player = "X" | "O" | null;
 
@@ -92,6 +93,19 @@ const Tateti: React.FC = () => {
     setWinner(null);
   };
 
+  useEffect(() => {
+    if (winner) {
+      Swal.fire({
+        position: "center",
+        title: `¡${winner} ha ganado!`,
+        color: "black",
+        timer: 2000,
+        showConfirmButton: true,
+        confirmButtonColor: "purple",
+      });
+    }
+  }, [winner]);
+
   return (
     <div className={style.app}>
       <h1 className={style.title}>Ta Te Ti</h1>
@@ -106,14 +120,14 @@ const Tateti: React.FC = () => {
           </div>
         ))}
       </div>
-      {winner && (
+      {/* {winner && (
         <p className={style.winner}>
           {winner === "X" ? "¡¡Ganaste!!" : "¡¡Perdiste!!"}
         </p>
       )}
       {!winner && !board.includes(null) && (
         <p className={style.winner}>Hemos empatado</p>
-      )}
+      )} */}
       <button className={style.resetButton} onClick={resetGame}>
         Reiniciar Juego
       </button>

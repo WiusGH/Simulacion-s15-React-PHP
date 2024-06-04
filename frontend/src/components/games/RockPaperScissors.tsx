@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import style from "./RockPaperScissorsLizardSpock.module.css";
 import { FaHandRock, FaHandPaper, FaHandScissors } from "react-icons/fa";
 import { RxQuestionMarkCircled } from "react-icons/rx";
@@ -13,9 +14,9 @@ const choiceIcons: { [key: string]: IconType } = {
 };
 
 const winningConditions: { [key: string]: string[] } = {
-  piedra: ["scissors"],
-  papel: ["rock"],
-  tijeras: ["paper"],
+  piedra: ["tijeras"],
+  papel: ["piedra"],
+  tijeras: ["papel"],
 };
 
 const RockPaperScissors: React.FC = () => {
@@ -25,6 +26,19 @@ const RockPaperScissors: React.FC = () => {
   const [isSinglePlayer, setIsSinglePlayer] = useState<boolean>(false);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const isReady = useRef(false);
+
+  useEffect(() => {
+    if (result) {
+      Swal.fire({
+        position: "center",
+        color: "black",
+        title: result,
+        timer: 2000,
+        showConfirmButton: true,
+        confirmButtonColor: "purple",
+      });
+    }
+  }, [result]);
 
   const startGame = (numPlayers: number) => {
     isReady.current = true;
