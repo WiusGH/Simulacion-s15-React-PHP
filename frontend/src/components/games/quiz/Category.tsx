@@ -41,7 +41,7 @@ const Category = ({
 
     if (SELECT_ANSWER === CORRECT_ANSWER) {
       setCorrectAnswer((prev) => prev + 1);
-      setScore((prev) => prev + 20);
+      setScore((prev) => prev + 1);
     }
   };
 

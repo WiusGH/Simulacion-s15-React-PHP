@@ -95,7 +95,7 @@ const Weapon = () => {
     if (nextWord === words[currentIndex].word) {
       setNextWord("");
       inputRef.current?.focus();
-      setRecord((prev) => prev + 20);
+      setRecord((prev) => prev + 1);
       setTimeLeft(TIME);
       startGame();
 
@@ -128,21 +128,13 @@ const Weapon = () => {
           Al Juego Arma la Palabra
         </h3>
 
-        {/*<div className="w-2/5 bg-pink-100">
-          <h3>Instrucciones:</h3>
-          <p>
-            El objetivo del juego es reordenar una palabra en un tiempo límite
-            de 30 segundos. El juego consta de un total de cinco palabras. Cada
-            palabra correctamente ordenada otorga 20 puntos, y la puntuación
-            máxima posible es de 100 puntos.
-          </p>
-        </div>*/}
-
-        <button
-          className="w-[256px] h-[48px] px-4 py-2 bg-[#4f1b83] text-white rounded tracking-widest hover:bg-[#b58ae0] hover:text-[#110d1b] ease-in duration-300"
-          onClick={startGame}>
-          Comienza
-        </button>
+        {!isRunning && (
+          <button
+            className="w-[256px] h-[48px] px-4 py-2 bg-[#4f1b83] text-white rounded tracking-widest hover:bg-[#b58ae0] hover:text-[#110d1b] ease-in duration-300"
+            onClick={startGame}>
+            Comienza
+          </button>
+        )}
 
         {isRunning && (
           <>

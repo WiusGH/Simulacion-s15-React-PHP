@@ -11,9 +11,11 @@ import blackjack from "../../../public/images/blackjack.png";
 import rps from "../../../public/images/rps.png";
 import simon from "../../../public/images/simon.png";
 import bingo from "../../../public/images/bingo.png";
-import connect4 from "../../../public/images/connect4.png"
-import truco from "../../../public/images/cartas/12Copas.jpg"
-import rpsls from "../../../public/images/rpsls/rpsls.jpg"
+import connect4 from "../../../public/images/connect4.png";
+import truco from "../../../public/images/cartas/12Copas.jpg";
+import rpsls from "../../../public/images/rpsls/rpsls.jpg";
+import arma from "../../../public/images/arma-palabra.png";
+import quiz from "../../../public/images/quiz.png";
 
 const Slider = () => {
   const [games, setGames] = useState<
@@ -58,12 +60,12 @@ const Slider = () => {
         url: "/jugar/Truco",
       },
       {
-        image: "../public/images/ArmaLaPalabra.png",
+        image: arma,
         alt: "Arma la palabra",
         url: "/jugar/ArmaLaPalabra",
       },
       {
-        image: "../public/images/Quiz.png",
+        image: quiz,
         alt: "Quiz",
         url: "/jugar/Quiz",
       },
@@ -71,7 +73,7 @@ const Slider = () => {
         image: rps,
         alt: "Rock Paper Scissors",
         url: "/jugar/RockPaperScissors",
-      }
+      },
     ]);
   }, []);
 
@@ -106,8 +108,7 @@ const Slider = () => {
             spaceBetween: 30,
           },
         }}
-        className="mySwiper"
-      >
+        className="mySwiper">
         {games.map((game) => (
           <SwiperSlide key={game.alt}>
             <a href={game.url}>
