@@ -1,0 +1,199 @@
+.bingoSectionGame {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: auto auto auto auto;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: #800080;
+  color: #faf9fa;
+  font-size: 14px;
+}
+
+.bingoSectionCrupier {
+  grid-column: span 4;
+  margin-bottom: 20px;
+}
+
+.bingoSectionRoulette {
+  margin: auto;
+}
+
+.bingoBoard {
+  display: grid;
+  gap: 5px;
+  border-radius: 15px;
+  padding: 10px;
+  background-color: #36115a;
+  justify-items: center;
+  box-shadow: 0 4px 8px #1c0830;
+  transition: transform 0.6s, box-shadow 0.3s;
+}
+
+.bingoBoard h3 {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.bingoBoard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px #1c0830;
+}
+
+.bingoBalls {
+  display: flex;
+  margin: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
+  background-color: #1c0830;
+  color: #faf9fa;
+}
+
+.highlighted {
+  background-color: #9c60d7;
+  color: #110d1b;
+}
+
+.reel {
+  width: 200px;
+  height: 200px;
+  background-color: #1c0830;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+  color: #faf9fa;
+  border: 2px solid #444;
+  transition: transform 1s ease-in-out;
+}
+
+.reel:hover {
+  transform: scale(1.15);
+  transition: transform 0.5s;
+}
+
+.reel.spinning {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.number {
+  animation: pop 0.5s ease-in-out;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.8);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bingoSectionControls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.buttonRoulette,
+.buttonUser,
+.buttonNewGame {
+  cursor: pointer;
+  background-color: #9c60d7;
+  border-radius: 10px;
+  text-align: center;
+  width: 150px;
+  height: 60px;
+  transition: background-color 0.5s;
+  color: #1c0830;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.buttonRoulette:hover,
+.buttonUser:hover,
+.buttonNewGame:hover {
+  background-color: #36115a;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.2);
+  transition: background-color 0.5s, transform 0.6s, box-shadow 0.5s;
+  color: #faf9fa;
+}
+
+.bingoSectionHistory {
+  grid-column: span 4;
+  text-align: center;
+  margin-top: 20px;
+  background-color: #36115a;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.6s, box-shadow 0.3s;
+}
+
+.bingoSectionHistory:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.bingoSectionHistory h3 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #9c60d7;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.bingoSectionHistory ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+  max-width: 950px;
+}
+
+.bingoSectionHistory li {
+  background-color: #36115a;
+  color: white;
+  border: 2px solid #9c60d7;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.bingoSectionHistory li:hover {
+  background-color: #9c60d7;
+  color: #36115a;
+  transform: scale(1.4);
+}

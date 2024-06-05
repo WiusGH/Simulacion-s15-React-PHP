@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./InfoGameModal.css";
+import styles from "./InfoGameModal.module.css";
 
 const InfoGameModal = ({
   isOpen,
@@ -29,28 +29,28 @@ const InfoGameModal = ({
   const imageUrl = `/public/images/${nameGame}.png`;
 
   return (
-    <div className="InfoGameModal-overlay" onClick={handleOverlayClick}>
-      <div className="InfoGameModal-content">
-        <button className="InfoGameModal-close" onClick={onClose}>
+    <div className={styles.InfoGameModalOverlay} onClick={handleOverlayClick}>
+      <div className={styles.InfoGameModalContent}>
+        <button className={styles.InfoGameModalClose} onClick={onClose}>
           X
         </button>
         <h1 className="text-white">{nameGame}</h1>
-        <div className="flex flex-col md:flex-row md:items-center">
-          <div className="InfoGameModal-buttons md:mr-4 md:w-1/3">
+        <div className={styles.flexContainer}>
+          <div className={styles.InfoGameModalButtons}>
             <button
-              className="info-button"
+              className={styles.infoButton}
               onClick={() => handleButtonClick("¿CÓMO JUGAR?")}
             >
               ¿CÓMO JUGAR?
             </button>
             <button
-              className="info-button"
+              className={styles.infoButton}
               onClick={() => handleButtonClick("REGLAS")}
             >
               REGLAS
             </button>
             <button
-              className="info-button"
+              className={styles.infoButton}
               onClick={() => handleButtonClick("PUNTUACIÓN")}
             >
               PUNTUACIÓN
@@ -59,7 +59,7 @@ const InfoGameModal = ({
           <img src={imageUrl} alt={nameGame} className="max-w-40 m-auto" />
         </div>
         {selectedButton && (
-          <div className="info-text">
+          <div className={styles.infoText}>
             {selectedButton === "¿CÓMO JUGAR?" && (
               <p>Aquí va el texto sobre cómo jugar.</p>
             )}

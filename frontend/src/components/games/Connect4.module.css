@@ -14,7 +14,7 @@
 }
 
 .board {
-  background-color: purple;
+  background-color: #800080;
   border-radius: 15px;
   display: flex;
   justify-content: center;

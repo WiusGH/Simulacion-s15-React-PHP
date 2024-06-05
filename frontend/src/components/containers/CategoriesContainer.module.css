@@ -1,6 +1,7 @@
 .categoriesContainer {
   padding: 2% 5%0 0;
   width: 100%;
+  min-height: 60vh;
   @media (max-width: 768px) {
     flex-direction: column;
   }

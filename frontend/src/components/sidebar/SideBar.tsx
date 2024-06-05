@@ -8,19 +8,16 @@ const SideBar = ({ game }: { game: string }) => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleSidebar = () => {
-    console.log("Toggling sidebar, current state:", expanded);
     setExpanded(!expanded);
   };
 
-  useEffect(() => {
-    console.log("Sidebar updated, expanded:", expanded);
-  }, [expanded]);
+  useEffect(() => {}, [expanded]);
 
   return (
-    <div className={`${style.sidebar} ${expanded ? "style.expanded" : ""}`}>
+    <div className={`${style.sidebar} ${expanded ? style.expanded : ""}`}>
       <div className={style.sidebarHandle} onClick={toggleSidebar}>
         <span>
-          <FaCircleArrowLeft />
+          <FaCircleArrowLeft size={32} />
         </span>
       </div>
       <div className={style.sidebarContent}>

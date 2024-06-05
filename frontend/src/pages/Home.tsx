@@ -8,7 +8,7 @@ import rps from "/public/images/rps.png";
 import simon from "/public/images/simon.png";
 import bingo from "/public/images/bingo.png";
 import connect4 from "/public/images/connect4.png";
-import truco from "/public/images/cartas/12Copas.jpg";
+import truco from "/public/images/truco.png";
 import rpsls from "/public/images/rpsls/rpsls.jpg";
 import arma from "/public/images/arma-palabra.png";
 import quiz from "/public/images/quiz.png";
@@ -23,8 +23,16 @@ const Home = () => {
   ];
 
   const newGames = [
-    { image: rps, alt: "Piedra, papel o tijeras", url: "/jugar/PiedraPapelTijeras" },
-    { image: rpsls, alt: "Piedra, papel, tijeras, lagarto o Spock", url: "/jugar/PiedraPapelTijerasLagartoSpock" },
+    {
+      image: rps,
+      alt: "Piedra, papel o tijeras",
+      url: "/jugar/PiedraPapelTijeras",
+    },
+    {
+      image: rpsls,
+      alt: "Piedra, papel, tijeras, lagarto o Spock",
+      url: "/jugar/PiedraPapelTijerasLagartoSpock",
+    },
     { image: truco, alt: "Truco", url: "/jugar/Truco" },
     { image: arma, alt: "Arma la palabra", url: "/jugar/ArmaLaPalabra" },
     { image: quiz, alt: "Quiz", url: "/jugar/Quiz" },

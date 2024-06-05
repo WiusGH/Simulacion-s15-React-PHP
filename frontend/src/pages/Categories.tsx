@@ -13,7 +13,7 @@ import simon from "../../public/images/simon.png";
 import bingo from "../../public/images/bingo.png";
 import connect4 from "../../public/images/connect4.png";
 import truco from "../../public/images/truco.png";
-import palabra from "../../public/images/palabra.jpeg";
+import palabra from "../../public/images/arma-palabra.png";
 import quiz from "../../public/images/quiz.png";
 
 interface Game {

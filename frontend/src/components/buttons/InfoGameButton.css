@@ -1,21 +1,21 @@
 .info-game-button {
-    background-color: rgb(19, 184, 239);
-    border-radius: 25px;
-    color: black;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 10px;
-    padding: 2px 20px;
+  background-color: #cfb3ea;
+  border-radius: 25px;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px;
+  padding: 2px 20px;
 
-    &:hover {
-        cursor: pointer;
-        transition: 0.5s;
-        transform: scale(1.2);
-        background-color: rgb(38, 38, 97);
-        color: white;
-    }
+  &:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    transform: scale(1.1);
+    background-color: #36115a;
+    color: white;
+  }
 }
 
 .info-game-button-icon {
-    font-size: 3rem;
+  font-size: 3rem;
 }
