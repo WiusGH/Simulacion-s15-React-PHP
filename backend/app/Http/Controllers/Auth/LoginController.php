@@ -45,15 +45,17 @@ class LoginController extends Controller
     {
         $user = Auth::user();
 
-        // Lo mismo que antes - sacar en prod
-        $request->user()->currentAccessToken()->delete();
-
-        Auth::logout();
-
         if ($user) {
+            // Elimina el token de acceso actual
+            $request->user()->currentAccessToken()->delete();
+
+            // Cierra la sesión del usuario
+            Auth::logout();
+
+            // Registra la acción de cierre de sesión
             Log::info('User ' . $user->username . ' logged out');
         } else {
-            Log::info('User logged out');
+            Log::info('Attempted logout with no authenticated user');
         }
 
         return response()->json(['message' => 'Logout successful'], 200);

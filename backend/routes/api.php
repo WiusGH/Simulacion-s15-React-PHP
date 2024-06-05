@@ -18,12 +18,13 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 /* Login-Logout-Register-Forgot Password */
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout']); // quiza se deba usar laravel sanctum para esto
 Route::post('/register', [UsuarioController::class, 'createUser']);
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store']);
 Route::post('/reset-password', [NewPasswordController::class, 'store']);
 
 /* Usuarios */
+Route::middleware('auth:sanctum')->get('/user', [UsuarioController::class, 'getAuthUser']);
 Route::get('/users', [UsuarioController::class, 'getAllUsers']);
 Route::get('/users/{id}', [UsuarioController::class, 'getUserById']);
 Route::middleware('auth:sanctum')->group(function () {
@@ -60,8 +61,9 @@ Route::delete('/amistades/{id}', [AmistadController::class, 'eliminarAmistad']);
 
 /* Mensajes */
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('mensajes/{user1}/{user2}', [MensajeController::class, 'index']);
-    Route::post('mensajes', [MensajeController::class, 'store']);
+    Route::get('/mensajes/global', [MensajeController::class, 'indexGlobal']);
+    Route::get('/mensajes/private/{user}', [MensajeController::class, 'indexPrivate']);
+    Route::post('/mensajes', [MensajeController::class, 'store']);
 });
 
 /* (juegos) Favoritos */
