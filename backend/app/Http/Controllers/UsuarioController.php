@@ -62,7 +62,7 @@ class UsuarioController extends Controller
         return response()->json($user, 201);
     }
 
-    public function modifyUser(Request $request)
+    public function updateUser(Request $request)
     {
         $user = Auth::user();
 
