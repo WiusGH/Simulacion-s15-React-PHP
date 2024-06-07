@@ -53,7 +53,7 @@ const Blackjack = () => {
         setDealerCards([cards[2], cards[3]]);
         calculateScores([cards[0], cards[1]], [cards[2], cards[3]]);
       } catch (error) {
-        console.error("Error drawing initial cards:", error);
+        console.error("Error al obtener las cartas iniciales:", error);
       }
     }
   };
@@ -75,6 +75,10 @@ const Blackjack = () => {
     }
   };
 
+  useEffect(() => {
+    checkBlackjack();
+  }, [playerCards, dealerCards]);
+
   // Obtiene la puntuación de la carta
   const getCardValue = (card: Card): number => {
     if (["KING", "QUEEN", "JACK"].includes(card.value)) {
@@ -83,6 +87,16 @@ const Blackjack = () => {
       return 11;
     } else {
       return parseInt(card.value, 10);
+    }
+  };
+
+  const checkBlackjack = () => {
+    if (playerScore === 21 && playerCards.length === 2 && dealerCards.length === 2) {
+      setGameOver(true);
+      checkScores();
+    } else if (dealerScore === 21 && playerCards.length === 2 && dealerCards.length === 2) {
+      setGameOver(true);
+      checkScores();
     }
   };
 
@@ -106,9 +120,10 @@ const Blackjack = () => {
     setPlayerScore(playerTotal);
     setDealerScore(dealerTotal);
 
-    // End the game if player exceeds 21
+    // Finaliza el juego si el jugador supera los 21 puntos
     if (playerTotal > 21) {
       setGameOver(true);
+      checkScores();
     }
   };
 
@@ -125,7 +140,9 @@ const Blackjack = () => {
 
   // Finaliza el juego, obtiene un juego de mazos nuevos y permite ver las cartas antes de comenzar un juego nuevo
   const endGame = () => {
-    checkScores();
+    if (!gameOver) {
+      checkScores();
+    }
     newDeck();
     setGameStarted(false);
     setGameOver(true);
