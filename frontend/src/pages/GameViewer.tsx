@@ -14,7 +14,7 @@ import Quiz from "../components/games/quiz/Quiz";
 import TrucoGame from "../components/games/Truco";
 import Connect4 from "../components/games/Connect4";
 import RockPaperScissors from "../components/games/RockPaperScissors";
-import RockPaperScissorsLizardSpock from "../components/games/RockPaperScissorsLizardSpock"
+import RockPaperScissorsLizardSpock from "../components/games/RockPaperScissorsLizardSpock";
 // Importar otros juegos a medida que se vayan creando
 
 const GameViewer: React.FC = () => {

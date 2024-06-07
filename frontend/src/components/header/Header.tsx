@@ -13,6 +13,10 @@ import { MdCasino } from "react-icons/md";
 import { GiBrain } from "react-icons/gi";
 import { FaHeadSideVirus } from "react-icons/fa6";
 import Modal from "../modal/Modal";
+import Search from "../../pages/Search";
+import CardGame from "../card/CardGame";
+import NotFound from "../card/NotFound";
+import SearchGame from "../../hook/SearchGame";
 
 const Header = () => {
   //const [loggedIn, setLoggedIn] = useState(false);
@@ -30,61 +34,97 @@ const Header = () => {
     setLoggedIn(!loggedIn);
   };*/
 
+  const {
+    handleToogleSearch,
+    handleSearchGame,
+    handleError,
+    toggleSearch,
+    allGames,
+    notFound,
+    findGame,
+  } = SearchGame();
+
   return (
-    <header className={style.header}>
-      <div className={style.box}>
-        <div>
-          <a href="/">
-            <img className={style.headerLogo} src={logo} alt="Logo" />
-          </a>
-        </div>
-        <div className={style.navigation}>
-          <Link className={style.navigationButton} to="/">
-            <RiStackFill />
-          </Link>
-          <Link className={style.navigationButton} to="/">
-            <FaMagnifyingGlass />
-          </Link>
-          {/*{loggedIn ? (
+    <>
+      <header className={style.header}>
+        <div className={style.box}>
+          <div>
+            <a href="/">
+              <img className={style.headerLogo} src={logo} alt="Logo" />
+            </a>
+          </div>
+          <div className={style.navigation}>
+            <Link className={style.navigationButton} to="/">
+              <RiStackFill />
+            </Link>
+
+            <div
+              className={style.navigationButton}
+              onClick={() => handleToogleSearch(true)}>
+              <FaMagnifyingGlass />
+            </div>
+            {/*{loggedIn ? (
             <Link to="/favoritos">
               <IoIosStar className={style.navigationButton} />
             </Link>
           ) : null}*/}
-          <button className={style.navigationButton} onClick={openPopup}>
-            {/* {loggedIn ? "Cerrar sesión" : "*/}Ingresar{/*"}*/}
-          </button>
+            <button className={style.navigationButton} onClick={openPopup}>
+              {/* {loggedIn ? "Cerrar sesión" : "*/}Ingresar{/*"}*/}
+            </button>
+          </div>
         </div>
-      </div>
-      <div className={style.buttonBar}>
-        <HeaderButton
-          text="Cartas"
-          icon={<GiCardAceSpades />}
-          url="/categorias/cartas"
-        />
-        <HeaderButton
-          text="Estrategia"
-          icon={<ImClubs />}
-          url="/categorias/estrategia"
-        />
-        <HeaderButton
-          text="Arcade"
-          icon={<SiApplearcade />}
-          url="/categorias/arcade"
-        />
-        <HeaderButton text="Mesa" icon={<MdCasino />} url="/categorias/mesa" />
-        <HeaderButton
-          text="Memoria"
-          icon={<GiBrain />}
-          url="/categorias/memoria"
-        />
-        <HeaderButton
-          text="Quiz"
-          icon={<FaHeadSideVirus />}
-          url="/categorias/quiz"
-        />
-      </div>
-      <Modal isOpen={isOpen} onClose={closePopup}></Modal>
-    </header>
+        <div className={style.buttonBar}>
+          <HeaderButton
+            text="Cartas"
+            icon={<GiCardAceSpades />}
+            url="/categorias/cartas"
+          />
+          <HeaderButton
+            text="Estrategia"
+            icon={<ImClubs />}
+            url="/categorias/estrategia"
+          />
+          <HeaderButton
+            text="Arcade"
+            icon={<SiApplearcade />}
+            url="/categorias/arcade"
+          />
+          <HeaderButton
+            text="Mesa"
+            icon={<MdCasino />}
+            url="/categorias/mesa"
+          />
+          <HeaderButton
+            text="Memoria"
+            icon={<GiBrain />}
+            url="/categorias/memoria"
+          />
+          <HeaderButton
+            text="Quiz"
+            icon={<FaHeadSideVirus />}
+            url="/categorias/quiz"
+          />
+        </div>
+        <Modal isOpen={isOpen} onClose={closePopup}></Modal>
+
+        <div>
+          {toggleSearch && (
+            <>
+              <Search
+                handleSearchGame={handleSearchGame}
+                allGames={allGames}
+                handleToogleSearch={handleToogleSearch}
+              />
+              {!notFound ? (
+                <CardGame findGame={findGame} />
+              ) : (
+                <NotFound handleError={handleError} notFound={notFound} />
+              )}
+            </>
+          )}
+        </div>
+      </header>
+    </>
   );
 };
 
