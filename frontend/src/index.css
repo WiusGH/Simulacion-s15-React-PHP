@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Luckiest Guy", Georgia, "Times New Roman", Times, serif;
+  height: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.align {
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.around {
+  justify-content: space-around;
+  align-items: center;
+}
+
+.evenly {
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.hover {
+  transition: 0.3s;
+  &:hover {
+    color: white;
+  }
+}
