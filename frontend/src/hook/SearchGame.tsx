@@ -47,8 +47,9 @@ const SearchGame = () => {
   const [findGame, setFindGame] = useState<Game>(initialFindGame);
   const [notFound, setNotFound] = useState(false);
   const [toggleSearch, setToggleSearch] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
 
-  const handleToogleSearch = (toggle: boolean): void => {
+  const handleToggleSearch = (toggle: boolean): void => {
     setToggleSearch(toggle);
     setFindGame(initialFindGame);
   };
@@ -71,10 +72,16 @@ const SearchGame = () => {
     setNotFound(error);
   };
 
+  const handleToggleMenu = (): void => {
+    setToggleMenu((prev) => !prev);
+  };
+
   return {
-    handleToogleSearch,
+    handleToggleSearch,
     handleSearchGame,
     handleError,
+    handleToggleMenu,
+    toggleMenu,
     toggleSearch,
     allGames,
     notFound,

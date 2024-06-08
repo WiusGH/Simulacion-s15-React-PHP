@@ -33,7 +33,7 @@ const Search = ({ handleSearchGame, allGames, handleToogleSearch }: Props) => {
   return (
     <>
       <form
-        className="w-full h-32 mt-3 flex flex-col justify-evenly items-center bg-[#E8DCF4] "
+        className="w-full h-32 flex flex-col justify-evenly items-center bg-[#E8DCF4] lg:mt-28"
         onSubmit={handleSubmit}>
         <label
           htmlFor="search"

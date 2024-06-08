@@ -17,8 +17,8 @@ const CategoriesContainer: React.FC<CategoriesContainerProps> = ({ games }) => {
   return (
     <div className={style.categoriesContainer + " " + "flex evenly"}>
       {games.map((game, index) => (
-        <div className="flex column align">
-          <a key={index} href={game.url}>
+        <div className="flex column align" key={index}>
+          <a href={game.url}>
             <GameThumbnail image={game.image} alt={game.name} />
           </a>
           <p className={style.title}>{game.name}</p>

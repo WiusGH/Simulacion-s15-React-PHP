@@ -14,7 +14,7 @@ const CardGame = ({ findGame }: Props) => {
   if (findGame.alt === "empy") return;
 
   return (
-    <div className="m-auto bg-[#efedf1] ">
+    <div className="h-[280px]  bg-[#E8DCF4]">
       <h3 className="w-1/2 m-auto text-2xl text-center tracking-wider rounded-xl py-2 text-[#E8DCF4] bg-[#4F1B83]">
         {findGame.alt}
       </h3>
