@@ -30,6 +30,7 @@ const InfoGameModal = ({
     Tateti: { 
       name: "Ta-Te-Ti",
       description: "Ta-Te-Ti es un juego de estrategia simple donde dos jugadores alternan colocando X y O en una cuadrícula de 3x3. El objetivo es alinear tres de tus símbolos en fila, columna o diagonal.", 
+      // description: "Reglas: juego por Turnos: El juego se juega por turnos, utilizando cruces (X) y ceros (O). Primer Movimiento: Elprimer jugador coloca su ficha (X o O) en cualquiera de los casilleros del tablero. Movimiento del Segundo Jugador: Luego, el segundo jugador coloca su ficha en uno de los casilleros vacíos. Continuación del Juego: Los jugadores continúan alternando sus movimientos, respetando los turnos. El objetivo es conseguir alinear tres marcas del mismo tipo en una fila horizontal, vertical o diagonal.Condición de Victoria: El primer jugador que consiga alinear tres de sus fichas en una fila horizontal, vertical o diagonal gana el juego y se declara ¡TA – TE – TI!Condición de Empate:Si todos los casilleros del tablero están llenos y ningún jugador ha conseguido alinear tres fichas, el juego termina en empate.", 
       image: ticTacToe 
     },
     Bingo: { 
