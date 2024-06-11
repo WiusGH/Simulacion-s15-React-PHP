@@ -1,0 +1,34 @@
+.container {
+  border-radius: 12px;
+  height: 90%;
+  margin: 28px 0 28px 0;
+  outline: 1.5px solid black;
+  padding: 6px 0 12px 0;
+  width: 100%;
+}
+
+.innerContainer {
+  width: 30%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.card {
+  width: 100px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.customHR {
+  border-top: 1px solid black;
+  margin: 5px 0 5px 0;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
