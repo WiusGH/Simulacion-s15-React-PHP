@@ -1,4 +1,4 @@
-import style from"./InfoGameButton.module.css";
+import style from "./InfoGameButton.module.css";
 import { useState } from "react";
 import InfoGameModal from "../modal/InfoGameModal";
 
@@ -19,12 +19,9 @@ const InfoGameButton = ({
 
   return (
     <>
-      <div
-        className={`$"flex flex-col align ${style.infoGameButton}`}
-        onClick={handleModal}
-      >
+      <div className={`${style.infoGameButton} flex column align center`} onClick={handleModal}>
         <div className={style.infoGameButtonIcon}>{icon}</div>
-        {text}
+        <p>{text}</p>
       </div>
       <InfoGameModal
         isOpen={isModalOpen}
