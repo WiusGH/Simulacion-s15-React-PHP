@@ -278,7 +278,7 @@ const Blackjack = () => {
             />
             <GenericButton
               text="Plantarse"
-              func={endGame}
+              func={() => endGame(false)}
               disabled={!gameStarted}
             />
           </>
