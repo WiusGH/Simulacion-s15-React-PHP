@@ -50,18 +50,18 @@ const Login: React.FC = () => {
         const csrfToken = document
           .querySelector('meta[name="csrf-token"]')
           ?.getAttribute("content");
-          const response = await axios.post(
-            "https://www.backendrestfulltest.icu/api/login",
-            {
-              email: formData.mail,
-              password: formData.password,
+        const response = await axios.post(
+          "https://www.backendrestfulltest.icu/api/login",
+          {
+            email: formData.mail,
+            password: formData.password,
+          },
+          {
+            headers: {
+              "X-CSRF-TOKEN": csrfToken,
             },
-            {
-              headers: {
-                "X-CSRF-TOKEN": csrfToken,
-              },
-            }
-          );
+          }
+        );
         localStorage.setItem("token", response.data.access_token);
         localStorage.setItem("id", response.data.id);
       } catch (error) {
