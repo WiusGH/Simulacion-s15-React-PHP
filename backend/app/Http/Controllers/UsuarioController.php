@@ -42,7 +42,7 @@ class UsuarioController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
           ], $messages);
-  
+
           if ($validator->fails()){
               $data = [
                   'message' => 'Error de validación',
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
         return response()->json($user, 201);
     }
 
-    public function modifyUser(Request $request)
+    public function updateUser(Request $request)
     {
         $user = Auth::user();
 
@@ -94,5 +94,14 @@ class UsuarioController extends Controller
         $userDb->delete();
 
         return response()->json(['message' => 'User deleted successfully'], 200);
+    }
+
+    public function getAuthUser(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'user' => $user,
+        ]);
     }
 }
