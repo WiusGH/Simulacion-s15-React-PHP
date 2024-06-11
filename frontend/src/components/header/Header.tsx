@@ -1,18 +1,17 @@
 import { useState } from "react";
-import style from "./Header.module.css";
+//import style from "./Header.module.css";
 import logo from "../../../public/images/Logopng.png";
 import { Link } from "react-router-dom";
 //import { IoIosStar } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { RiStackFill } from "react-icons/ri";
-import HeaderButton from "../buttons/HeaderButton";
-import { GiCardAceSpades } from "react-icons/gi";
-import { ImClubs } from "react-icons/im";
-import { SiApplearcade } from "react-icons/si";
-import { MdCasino } from "react-icons/md";
-import { GiBrain } from "react-icons/gi";
-import { FaHeadSideVirus } from "react-icons/fa6";
+//import HeaderButton from "../buttons/HeaderButton";
 import Modal from "../modal/Modal";
+import Search from "../../pages/Search";
+import CardGame from "../card/CardGame";
+import NotFound from "../card/NotFound";
+import SearchGame from "../../hook/SearchGame";
+import NavBar from "./NavBar";
 
 const Header = () => {
   //const [loggedIn, setLoggedIn] = useState(false);
@@ -30,61 +29,87 @@ const Header = () => {
     setLoggedIn(!loggedIn);
   };*/
 
+  const {
+    handleToggleSearch,
+    handleSearchGame,
+    handleError,
+    handleToggleMenu,
+    toggleMenu,
+    toggleSearch,
+    allGames,
+    notFound,
+    findGame,
+  } = SearchGame();
+
   return (
-    <header className={style.header}>
-      <div className={style.box}>
-        <div>
-          <a href="/">
-            <img className={style.headerLogo} src={logo} alt="Logo" />
-          </a>
-        </div>
-        <div className={style.navigation}>
-          <Link className={style.navigationButton} to="/">
-            <RiStackFill />
-          </Link>
-          <Link className={style.navigationButton} to="/">
-            <FaMagnifyingGlass />
-          </Link>
-          {/*{loggedIn ? (
+    <>
+      <header className="w-full h-20 bg-[#4f1b83] relative z-10 lg:h-56">
+        <div className="h-20 flex justify-between lg:h-28">
+          <div className="w-1/2 h-20 ">
+            <Link to="/">
+              <img
+                className="w-full h-full object-contain"
+                src={logo}
+                alt="Logo"
+              />
+            </Link>
+          </div>
+          <div className="hidden lg:w-1/3 lg:grid place-content-center">
+            <div
+              className="text-3xl text-[#E8DCF4]"
+              onClick={() => handleToggleSearch(true)}>
+              <FaMagnifyingGlass />
+            </div>
+            {/*{loggedIn ? (
             <Link to="/favoritos">
               <IoIosStar className={style.navigationButton} />
             </Link>
           ) : null}*/}
-          <button className={style.navigationButton} onClick={openPopup}>
-            {/* {loggedIn ? "Cerrar sesión" : "*/}Ingresar{/*"}*/}
+          </div>
+
+          <button
+            className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]"
+            onClick={openPopup}>
+            {/* {loggedIn ? "Cerrar sesión" : "*/}
+            Ingresar{/*"}*/}
           </button>
+
+          <div
+            className="w-20 grid place-content-center text-5xl  text-[#E8DCF4] lg:hidden"
+            onClick={() => handleToggleMenu()}>
+            {/*<Link className="text-4xl text-[#E8DCF4]" to="/">*/}
+            <RiStackFill />
+            {/*</Link>*/}
+          </div>
+
+          <NavBar
+            toggleMenu={toggleMenu}
+            openPopup={openPopup}
+            handleToggleMenu={handleToggleMenu}
+            handleToggleSearch={handleToggleSearch}
+          />
         </div>
-      </div>
-      <div className={style.buttonBar}>
-        <HeaderButton
-          text="Cartas"
-          icon={<GiCardAceSpades />}
-          url="/categorias/cartas"
-        />
-        <HeaderButton
-          text="Estrategia"
-          icon={<ImClubs />}
-          url="/categorias/estrategia"
-        />
-        <HeaderButton
-          text="Arcade"
-          icon={<SiApplearcade />}
-          url="/categorias/arcade"
-        />
-        <HeaderButton text="Mesa" icon={<MdCasino />} url="/categorias/mesa" />
-        <HeaderButton
-          text="Memoria"
-          icon={<GiBrain />}
-          url="/categorias/memoria"
-        />
-        <HeaderButton
-          text="Quiz"
-          icon={<FaHeadSideVirus />}
-          url="/categorias/quiz"
-        />
-      </div>
-      <Modal isOpen={isOpen} onClose={closePopup}></Modal>
-    </header>
+
+        <Modal isOpen={isOpen} onClose={closePopup}></Modal>
+
+        <div>
+          {toggleSearch && (
+            <>
+              <Search
+                handleSearchGame={handleSearchGame}
+                allGames={allGames}
+                handleToogleSearch={handleToggleSearch}
+              />
+              {!notFound ? (
+                <CardGame findGame={findGame} />
+              ) : (
+                <NotFound handleError={handleError} notFound={notFound} />
+              )}
+            </>
+          )}
+        </div>
+      </header>
+    </>
   );
 };
 
