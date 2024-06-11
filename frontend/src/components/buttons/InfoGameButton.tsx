@@ -1,4 +1,4 @@
-import "./InfoGameButton.css";
+import style from"./InfoGameButton.module.css";
 import { useState } from "react";
 import InfoGameModal from "../modal/InfoGameModal";
 
@@ -13,26 +13,22 @@ const InfoGameButton = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
     <>
       <div
-        className="flex flex-col align info-game-button"
-        onClick={handleOpenModal}
+        className={`$"flex flex-col align ${style.infoGameButton}`}
+        onClick={handleModal}
       >
-        <div className="info-game-button-icon">{icon}</div>
+        <div className={style.infoGameButtonIcon}>{icon}</div>
         {text}
       </div>
       <InfoGameModal
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        onClose={handleModal}
         nameGame={nameGame}
       />
     </>
