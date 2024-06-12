@@ -1,4 +1,4 @@
-import style from "./HeaderButton.module.css";
+//import style from "./HeaderButton.module.css";
 
 const HeaderButton = ({
   text,
@@ -11,7 +11,7 @@ const HeaderButton = ({
 }) => {
   return (
     <a href={url}>
-      <div className={style.headerButton}>
+      <div className="flex">
         {icon}
         &nbsp;
         {text}

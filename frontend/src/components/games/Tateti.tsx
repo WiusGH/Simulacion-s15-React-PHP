@@ -18,6 +18,7 @@ const Tateti: React.FC = () => {
       }, 1000);
       return () => clearTimeout(timer);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isXNext, winner]);
 
   const handleClick = (index: number) => {
@@ -94,17 +95,35 @@ const Tateti: React.FC = () => {
   };
 
   useEffect(() => {
-    if (winner) {
+    if (winner === "X") {
       Swal.fire({
         position: "center",
-        title: `¡${winner} ha ganado!`,
+        title: `¡Ganaste!`,
+        color: "black",
+        timer: 2000,
+        showConfirmButton: true,
+        confirmButtonColor: "purple",
+      });
+    } else if (winner === "O") {
+      Swal.fire({
+        position: "center",
+        title: `¡Perdiste!`,
+        color: "black",
+        timer: 2000,
+        showConfirmButton: true,
+        confirmButtonColor: "purple",
+      });
+    } else if (!winner && !board.includes(null)) {
+      Swal.fire({
+        position: "center",
+        title: `Hemos Empatado`,
         color: "black",
         timer: 2000,
         showConfirmButton: true,
         confirmButtonColor: "purple",
       });
     }
-  }, [winner]);
+  }, [winner, board]);
 
   return (
     <div className={style.app}>

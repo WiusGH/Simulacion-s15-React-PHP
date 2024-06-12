@@ -52,7 +52,7 @@ const Register: React.FC = () => {
         console.log(response.data);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("id", response.data.id);
-        navigate("/usuario");
+        navigate("/");
       } catch (error) {
         const axiosError = error as AxiosError<ErrorResponse>;
         if (axiosError.response && axiosError.response.data) {

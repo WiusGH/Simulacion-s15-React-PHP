@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
-import "./Simon.css";
+import style from "./Simon.module.css";
 import beep1 from '../../../public/sounds/simon/beep1.flac';
 import beep2 from '../../../public/sounds/simon/beep2.wav';
 import beep3 from '../../../public/sounds/simon/beep3.wav';
 import beep4 from '../../../public/sounds/simon/beep4.wav';
 import gameStart from '../../../public/sounds/simon/game-start.wav';
 import gameOver from '../../../public/sounds/simon/game-over.wav';
+import GenericButton from "../buttons/GenericButton";
 
 const Simon = () => {
   const [selectedColors, setSelectedColors] = useState<number[]>([]); // Contador de colores generador aleatoriamente
@@ -131,22 +132,22 @@ const Simon = () => {
   // FIX: reajustar el tamaño para que quepa cómodamente en pantallas más pequeñas
 
   return (
-    <div className="flex column align">
-      <div className="counter" id="counter">
+    <div className={`${style.container} flex align column`}>
+      <div className={style.counter} id="counter">
         {counter}
       </div>
-      <div className="container">
-        <div className="row">
-          <div className={gameStarted ? "item pointer red" : "item red"} id="1" onClick={() => handleUserInput(1)}></div>
-          <div className={gameStarted ? "item pointer blue" : "item blue"} id="2" onClick={() => handleUserInput(2)}></div>
+      <div className={style.innerContainer}>
+        <div className={style.row}>
+          <div className={gameStarted ? `${style.item} ${style.red} pointer` : `${style.item} ${style.red}`} id="1" onClick={() => handleUserInput(1)}></div>
+          <div className={gameStarted ? `${style.item} ${style.blue} pointer` : `${style.item} ${style.blue}`} id="2" onClick={() => handleUserInput(2)}></div>
         </div>
-        <div className="row">
-          <div className={gameStarted ? "item pointer green" : "item green"} id="3" onClick={() => handleUserInput(3)}></div>
-          <div className={gameStarted ? "item pointer yellow" : "item yellow"} id="4" onClick={() => handleUserInput(4)}></div>
+        <div className={style.row}>
+          <div className={gameStarted ? `${style.item} ${style.green} pointer` : `${style.item} ${style.green}`} id="3" onClick={() => handleUserInput(3)}></div>
+          <div className={gameStarted ? `${style.item} ${style.yellow} pointer` : `${style.item} ${style.yellow}`} id="4" onClick={() => handleUserInput(4)}></div>
         </div>
       </div>
-      <div className="button" id="start-button" onClick={start}>
-        {gameStarted ? "Stop" : "Start"}
+      <div className={style.button} id="start-button" onClick={start}>
+        {gameStarted ? "Detener" : "Iniciar"}
       </div>
     </div>
   );

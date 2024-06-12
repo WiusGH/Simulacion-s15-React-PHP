@@ -1,4 +1,4 @@
-.info-game-button {
+.infoGameButton {
   background-color: #cfb3ea;
   border-radius: 25px;
   color: black;
@@ -16,6 +16,6 @@
   }
 }
 
-.info-game-button-icon {
+.infoGameButtonIcon {
   font-size: 3rem;
 }

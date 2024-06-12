@@ -3,14 +3,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 12px;
+  outline: 1.5px solid black;
+  margin: 25px 0 25px 0;
+  width: 100%;
+  padding: 20px 0 15px 0;
 }
 
 .buttons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin: 20px;
-  width: 70%;
+  margin-top: 20px;
+  width: 50%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .board {
@@ -20,6 +28,9 @@
   justify-content: center;
   align-items: center;
   padding: 15px;
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
 }
 
 .boardcolumn {
@@ -35,6 +46,10 @@
   height: 50px;
   width: 50px;
   margin: 5px 10px;
+  @media (max-width: 768px) {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 .selection:hover {
