@@ -1,10 +1,10 @@
 .sidebar {
+  position: relative;
   top: 0;
-  left: 0;
-  width: 30px;
-  min-height: 70vh;
+  right: 0;
+  width: 100%;
+  height: 100%;
   background-color: #4f1b83;
-  transition: width 0.3s ease;
   z-index: 1000;
 }
 
@@ -26,6 +26,8 @@
 
 .sidebar.expanded {
   width: 200px;
+  right: 0;
+  position: fixed;
 }
 
 .sidebar.expanded .sidebarHandle {
@@ -34,11 +36,4 @@
 
 .sidebar.expanded .sidebarContent {
   display: block;
-}
-
-.title {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 20px;
 }

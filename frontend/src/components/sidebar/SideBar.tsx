@@ -14,7 +14,7 @@ const SideBar = ({ game }: { game: string }) => {
   useEffect(() => {}, [expanded]);
 
   return (
-    <div className={`${style.sidebar} ${expanded ? style.expanded : ""}`}>
+    <div className={`${style.sidebar} ${expanded ? style.expanded + " " + "flex column center align": "flex column center align"}`}>
       <div className={style.sidebarHandle} onClick={toggleSidebar}>
         <span>
           {expanded ? <FaCircleArrowRight size={24} /> : <FaCircleArrowLeft size={24} />}

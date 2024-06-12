@@ -5,6 +5,9 @@
   outline: 1.5px solid black;
   padding: 6px 0 12px 0;
   width: 100%;
+  @media (max-width: 768px) {
+    outline: none;
+  }
 }
 
 .innerContainer {
