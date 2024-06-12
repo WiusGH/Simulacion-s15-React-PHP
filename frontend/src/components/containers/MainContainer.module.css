@@ -10,6 +10,9 @@
 }
 
 .gameContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 95%;
   @media (max-width: 768px) {
     width: 85%;
