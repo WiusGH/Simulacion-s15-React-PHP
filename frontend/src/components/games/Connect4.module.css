@@ -8,6 +8,9 @@
   margin: 25px 0 25px 0;
   width: 100%;
   padding: 20px 0 15px 0;
+  @media (max-width: 768px) {
+    outline: none;
+  }
 }
 
 .buttons {

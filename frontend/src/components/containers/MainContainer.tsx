@@ -1,11 +1,15 @@
-import "./MainContainer.css";
+import style from "./MainContainer.module.css";
+import SideBar from "../sidebar/SideBar";
 
-const MainContainer = ({ game }: { game: React.ReactNode }) => {
-  // const MainContainer = ({ game, sidebar }: { game: React.ReactNode, sidebar: React.ReactNode }) => {
+const MainContainer = ({ game, gameName }: { game: React.ReactNode, gameName: string }) => {
   return (
-    <div className="flex center align w-full main-container">
-      {game}
-      {/*// Agregar sidebar a futuro */}
+    <div className={style.mainContainer}>
+      <div className={style.gameContent}>
+        {game}
+      </div>
+      <div className={style.sidebar}>
+      <SideBar game={gameName} />
+      </div>
     </div>
   );
 };

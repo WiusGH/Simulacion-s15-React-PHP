@@ -4,6 +4,9 @@
   border-radius: 15px;
   margin: 1% 0;
   padding: 1%;
+  @media (max-width: 768px) {
+    outline: none;
+  }
 }
 
 .title {

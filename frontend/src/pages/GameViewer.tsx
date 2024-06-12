@@ -7,7 +7,6 @@ import Error404 from "./Error404";
 import Simon from "../components/games/Simon";
 import Tateti from "../components/games/Tateti";
 import Blackjack from "../components/games/Blackjack";
-import Sidebar from "../components/sidebar/SideBar";
 import Bingo from "../components/games/Bingo";
 import Weapon from "../components/games/arma-palabra/Weapon";
 import Quiz from "../components/games/quiz/Quiz";
@@ -45,9 +44,8 @@ const GameViewer: React.FC = () => {
     <div>
       <Header />
       <div className="flex">
-        <MainContainer game={selectedGame} />{" "}
+        <MainContainer game={selectedGame} gameName={selectedGameName} />{" "}
         {/* Muestra dinámicamente el juego seleccionado */}
-        <Sidebar game={selectedGameName} />
       </div>
       <Footer />
     </div>
