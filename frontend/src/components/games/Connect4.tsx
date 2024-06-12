@@ -14,10 +14,6 @@ const Connect4 = () => {
   const [winner, setWinner] = useState<Winner>(null); // Indica el ganador
   const [gameStarted, setGameStarted] = useState(false); // Indica si el juego ha comenzado
   const [count, setCount] = useState(0); // Cuenta el número de jugadas para saber si el tablero está lleno y no hay ganador
-  // Variables para el modal
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-  const [winnerDetermined, setWinnerDetermined] = useState(false);
 
   // Comienza el juego y se asegura de reiniciar el tablero
   const start = (players: number) => {
@@ -193,7 +189,6 @@ const Connect4 = () => {
             board[col + 3][row] === color
           ) {
             setWinner(color as "red" | "yellow");
-            setWinnerDetermined(true);
             return;
           }
           if (
@@ -203,7 +198,6 @@ const Connect4 = () => {
             board[col][row + 3] === color
           ) {
             setWinner(color as "red" | "yellow");
-            setWinnerDetermined(true);
             return;
           }
           if (
@@ -214,7 +208,6 @@ const Connect4 = () => {
             board[col + 3][row + 3] === color
           ) {
             setWinner(color as "red" | "yellow");
-            setWinnerDetermined(true);
             return;
           }
           if (
@@ -225,7 +218,6 @@ const Connect4 = () => {
             board[col - 3][row + 3] === color
           ) {
             setWinner(color as "red" | "yellow");
-            setWinnerDetermined(true);
             return;
           }
         }
@@ -235,26 +227,12 @@ const Connect4 = () => {
     // 41 en vez de 42 por la naturaleza de React al actualizar variables de estado
     if (count === 41) {
       setWinner("tie");
-      setWinnerDetermined(true);
       return;
     }
   };
-  // Establece mensaje para el modal y lo muestra
-  useEffect(() => {
-    if (winner !== null) {
-      setShowModal(true);
-      setModalMessage(
-        winner === "tie"
-          ? "¡Es un empate!"
-          : `¡El ${winner === "red" ? "Rojo" : "Amarillo"} gana!`
-      );
-    }
-  }, [winner]);
 
   // Resetea todos los parámetros para permitir iniciar un nuevo juego
   const reset = () => {
-    setShowModal(false);
-    setModalMessage("");
     setGameStarted(false);
     setBoard(Array.from({ length: 7 }, () => Array(6).fill(null)));
     setWinner(null);
