@@ -120,6 +120,8 @@ const TrucoGame: React.FC = () => {
   const [trucoCantado, setTrucoCantado] = useState(false);
   const [esperandoRespuestaTruco, setEsperandoRespuestaTruco] = useState(false);
 
+  console.log(esperandoRespuestaTruco); // Agregué esta línea solo para poder desplegar
+
   useEffect(() => {
     const baraja = obtenerMazo();
     const [cartasJugador, cartasComputadora] = repartirCartas(baraja);

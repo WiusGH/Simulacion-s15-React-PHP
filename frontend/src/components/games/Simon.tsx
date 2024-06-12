@@ -6,7 +6,6 @@ import beep3 from '../../../public/sounds/simon/beep3.wav';
 import beep4 from '../../../public/sounds/simon/beep4.wav';
 import gameStart from '../../../public/sounds/simon/game-start.wav';
 import gameOver from '../../../public/sounds/simon/game-over.wav';
-import GenericButton from "../buttons/GenericButton";
 
 const Simon = () => {
   const [selectedColors, setSelectedColors] = useState<number[]>([]); // Contador de colores generador aleatoriamente
