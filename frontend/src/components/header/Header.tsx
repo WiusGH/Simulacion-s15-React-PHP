@@ -1,22 +1,45 @@
-import { useState } from "react";
-//import style from "./Header.module.css";
-import logo from "../../../public/images/Logopng.png";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-//import { IoIosStar } from "react-icons/io";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { RiStackFill } from "react-icons/ri";
-//import HeaderButton from "../buttons/HeaderButton";
+import logo from "../../../public/images/Logopng.png";
 import Modal from "../modal/Modal";
 import Search from "../../pages/Search";
 import CardGame from "../card/CardGame";
 import NotFound from "../card/NotFound";
 import SearchGame from "../../hook/SearchGame";
 import NavBar from "./NavBar";
+import axios from "axios";
+
+interface UserData {
+  username: string;
+  email: string;
+  id: number;
+}
 
 const Header = () => {
-  //const [loggedIn, setLoggedIn] = useState(false);
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("https://www.backendrestfulltest.icu/api/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          setLoggedIn(true);
+          setUserData(response.data.user);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data: ", error);
+          setLoggedIn(false);
+        });
+    }
+  }, []);
+
   const openPopup = () => {
     setIsOpen(true);
   };
@@ -25,9 +48,13 @@ const Header = () => {
     setIsOpen(false);
   };
 
-  /*const handleLogin = () => {
-    setLoggedIn(!loggedIn);
-  };*/
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("data");
+    setLoggedIn(false);
+    setUserData(null);
+  };
 
   const {
     handleToggleSearch,
@@ -45,43 +72,50 @@ const Header = () => {
     <>
       <header className="w-full h-20 bg-[#4f1b83] relative z-10 lg:h-56">
         <div className="h-20 flex justify-between lg:h-28">
-          <div className="w-1/2 h-20 ">
+          <div className="w-1/2 h-20">
             <Link to="/">
-              <img
-                className="w-full h-full object-contain"
-                src={logo}
-                alt="Logo"
-              />
+              <img className="w-full h-full object-contain" src={logo} alt="Logo" />
             </Link>
           </div>
           <div className="hidden lg:w-1/3 lg:grid place-content-center">
             <div
               className="text-3xl text-[#E8DCF4]"
-              onClick={() => handleToggleSearch(true)}>
+              onClick={() => handleToggleSearch(true)}
+            >
               <FaMagnifyingGlass />
             </div>
-            {/*{loggedIn ? (
-            <Link to="/favoritos">
-              <IoIosStar className={style.navigationButton} />
-            </Link>
-          ) : null}*/}
+            {loggedIn ? (
+              <Link to="/favoritos">
+                {/* Add your favorite icon here */}
+              </Link>
+            ) : null}
           </div>
-
-          <button
-            className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]"
-            onClick={openPopup}>
-            {/* {loggedIn ? "Cerrar sesión" : "*/}
-            Ingresar{/*"}*/}
-          </button>
-
+          {loggedIn ? (
+            <>
+              <div className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]">
+                {userData && <span>Hola, {userData.username}</span>}
+              </div>
+              <button
+                className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]"
+                onClick={handleLogout}
+              >
+                Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <button
+              className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]"
+              onClick={openPopup}
+            >
+              Ingresar
+            </button>
+          )}
           <div
             className="w-20 grid place-content-center text-5xl  text-[#E8DCF4] lg:hidden"
-            onClick={() => handleToggleMenu()}>
-            {/*<Link className="text-4xl text-[#E8DCF4]" to="/">*/}
+            onClick={() => handleToggleMenu()}
+          >
             <RiStackFill />
-            {/*</Link>*/}
           </div>
-
           <NavBar
             toggleMenu={toggleMenu}
             openPopup={openPopup}
@@ -89,9 +123,7 @@ const Header = () => {
             handleToggleSearch={handleToggleSearch}
           />
         </div>
-
         <Modal isOpen={isOpen} onClose={closePopup}></Modal>
-
         <div>
           {toggleSearch && (
             <>
