@@ -93,7 +93,8 @@ const Header = () => {
           {loggedIn ? (
             <>
               <div className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]">
-                {userData && <span>Hola, {userData.username}</span>}
+                {userData && <span>¡Hola, {userData.username}!</span>}
+                <a href="/perfil/wius"> Ver perfil</a>
               </div>
               <button
                 className="hidden lg:w-1/3 lg:grid place-content-center lg:text-2xl lg:tracking-widest  lg:text-[#E8DCF4]"

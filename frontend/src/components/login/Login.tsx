@@ -37,8 +37,7 @@ const Login: React.FC = () => {
       });
       localStorage.setItem("token", response.data.access_token);
       localStorage.setItem("id", response.data.id);
-      localStorage.setItem("data", response.data); // Solo para pruebas
-      window.location.reload(); // Reload the page to update the Header component
+      window.location.reload();
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response) {
