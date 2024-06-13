@@ -123,12 +123,7 @@ const TrucoGame: React.FC = () => {
   console.log(esperandoRespuestaTruco); // Agregué esta línea solo para poder desplegar
 
   useEffect(() => {
-    const baraja = obtenerMazo();
-    const [cartasJugador, cartasComputadora] = repartirCartas(baraja);
-    setJugador(cartasJugador);
-    setComputadora(cartasComputadora);
-    setJugadorInicial(cartasJugador);
-    setComputadoraInicial(cartasComputadora);
+    reiniciarJuego();
   }, []);
 
   const calcularEnvido = (mano: Carta[]): number => {
@@ -184,34 +179,36 @@ const TrucoGame: React.FC = () => {
         (carta) => carta !== cartaComputadora
       );
       setComputadora(nuevasCartasComputadora);
-      setJugadas({
-        jugador: [...jugadas.jugador],
-        computadora: [...jugadas.computadora, cartaComputadora],
-      });
-
-      if (nuevasCartasComputadora.length > 0) {
-        const valorCartaComputadora = obtenerValorCarta(cartaComputadora);
-        const valorCartaJugador = obtenerValorCarta(
-          jugadas.jugador[jugadas.jugador.length - 1]
-        );
-
-        if (valorCartaComputadora > valorCartaJugador) {
-          const cartaMenor = seleccionarCartaMenor(nuevasCartasComputadora);
-          const nuevasCartasComputadoraMenor = nuevasCartasComputadora.filter(
-            (carta) => carta !== cartaMenor
-          );
-          setComputadora(nuevasCartasComputadoraMenor);
-          setJugadas({
-            jugador: [...jugadas.jugador],
-            computadora: [...jugadas.computadora, cartaMenor],
-          });
-        }
-        setTurnoJugador(true);
-      } else {
-        setTurnoJugador(true);
-      }
+      setJugadas((prevJugadas) => ({
+        jugador: [...prevJugadas.jugador],
+        computadora: [...prevJugadas.computadora, cartaComputadora],
+      }));
+      setTurnoJugador(true);
     }, 1000);
   };
+
+  const handleComputadoraCantaEnvido = () => {
+    if (!envidoCantado) {
+      const envidoComputadora = calcularEnvido(computadoraInicial);
+      if (envidoComputadora >= 25) {
+        setChat([...chat, "Computadora: Envido"]);
+        setEnvidoCantado(true);
+        setEsperandoRespuestaEnvido(true);
+        setTurnoJugador(true);
+      } else {
+        handleComputadoraTiraCarta();
+      }
+    } else {
+      handleComputadoraTiraCarta();
+    }
+  };
+
+  useEffect(() => {
+    console.log(
+      "Estado actual de esperandoRespuestaEnvido:",
+      esperandoRespuestaEnvido
+    );
+  }, [esperandoRespuestaEnvido]);
 
   const handleCantarEnvido = () => {
     setChat([...chat, "Jugador: Envido"]);
@@ -229,7 +226,7 @@ const TrucoGame: React.FC = () => {
           `Jugador: Envido`,
           "Computadora: Quiero",
           `Jugador: Mi envido es ${envidoJugador}`,
-          `Computadora: Mi envido es ${envidoComputadora}`,
+          `Computadora: ${envidoComputadora} son mejores`,
         ]);
       } else {
         if (envidoComputadora > 25 && envidoJugador > envidoComputadora) {
@@ -301,20 +298,15 @@ const TrucoGame: React.FC = () => {
 
   const handleResponderTruco = (respuesta: string) => {
     if (respuesta === "Quiero") {
-      const valorMinimoAceptado = 8;
-      const cartasDeValor = computadora.filter(
-        (carta) => obtenerValorCarta(carta) >= valorMinimoAceptado
-      );
-
-      if (cartasDeValor.length >= 2) {
-        setChat([...chat, `Jugador: Quiero`]);
-      } else {
-        setChat([...chat, "Jugador: No Quiero"]);
-      }
-      setTrucoCantado(true);
-      setTurnoJugador(true);
-      setEsperandoRespuestaTruco(false);
+      setChat([...chat, "Jugador: Quiero"]);
+    } else {
+      setChat([...chat, "Jugador: No Quiero"]);
     }
+    setTrucoCantado(true);
+    setTurnoJugador(true);
+    setEsperandoRespuestaTruco(false);
+
+    handleComputadoraTiraCarta();
   };
 
   const handleJugarCarta = (index: number) => {
@@ -322,30 +314,73 @@ const TrucoGame: React.FC = () => {
       const carta = jugador[index];
       const nuevasCartasJugador = jugador.filter((_, i) => i !== index);
       setJugador(nuevasCartasJugador);
-      setJugadas({
-        jugador: [...jugadas.jugador, carta],
-        computadora: [...jugadas.computadora],
-      });
+      setJugadas((prevJugadas) => ({
+        jugador: [...prevJugadas.jugador, carta],
+        computadora: [...prevJugadas.computadora],
+      }));
       setTurnoJugador(false);
 
       setTimeout(() => {
-        const envidoComputadora = calcularEnvido(computadoraInicial);
-        if (
-          !envidoCantado &&
-          envidoComputadora > 25 &&
-          !esperandoRespuestaEnvido
-        ) {
-          setChat([...chat, "Computadora: Envido"]);
-          setEsperandoRespuestaEnvido(true);
-        } else {
-          handleComputadoraTiraCarta();
-        }
+        handleComputadoraCantaEnvido();
       }, 1000);
     }
   };
 
+  const renderizarCartasJugadas = () => {
+    return (
+      <div className="mesa">
+        <div className="mesa-computadora">
+          {jugadas.computadora.map((carta, index) => (
+            <Card
+              key={`computadora-${index}`}
+              valor={carta.valor}
+              palo={carta.palo}
+              src={carta.src}
+              style={{ left: `${index * 20}px`, top: "50px" }}
+            />
+          ))}
+        </div>
+        <div className="mesa-jugador">
+          {jugadas.jugador.map((carta, index) => (
+            <Card
+              key={`jugador-${index}`}
+              valor={carta.valor}
+              palo={carta.palo}
+              src={carta.src}
+              style={{ left: `${index * 20}px`, top: "150px" }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const reiniciarJuego = () => {
+    const baraja = obtenerMazo();
+    const [cartasJugador, cartasComputadora] = repartirCartas(baraja);
+    setJugador(cartasJugador);
+    setComputadora(cartasComputadora);
+    setJugadorInicial(cartasJugador);
+    setComputadoraInicial(cartasComputadora);
+    setTurnoJugador(true);
+    setJugadas({ jugador: [], computadora: [] });
+    setChat([]);
+    setEnvidoCantado(false);
+    setEsperandoRespuestaEnvido(false);
+    setTrucoCantado(false);
+    setEsperandoRespuestaTruco(false);
+  };
+
+  const debeDeshabilitarEnvido = (): boolean => {
+    return (
+      !envidoCantado &&
+      jugadas.jugador.length === 1 &&
+      jugadas.computadora.length === 1
+    );
+  };
+
   return (
-    <div>
+    <div className="truco-game">
       <h1 className="title">Truco</h1>
       <div className="game">
         <div className="players">
@@ -358,35 +393,12 @@ const TrucoGame: React.FC = () => {
                   valor={carta.valor}
                   palo={carta.palo}
                   src={`../../../public/images/cartas/back.svg`}
-                  //tapada
+                  tapada
                 />
               ))}
             </div>
           </div>
-          <div>
-            <div className="mesa">
-              <div className="mesa-computadora">
-                {jugadas.computadora.map((carta, index) => (
-                  <Card
-                    key={index}
-                    valor={carta.valor}
-                    palo={carta.palo}
-                    src={carta.src}
-                  />
-                ))}
-              </div>
-              <div className="mesa-jugador">
-                {jugadas.jugador.map((carta, index) => (
-                  <Card
-                    key={index}
-                    valor={carta.valor}
-                    palo={carta.palo}
-                    src={carta.src}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          <div>{renderizarCartasJugadas()}</div>
           <div>
             <h2>Jugador</h2>
             <div className="cards">
@@ -400,22 +412,28 @@ const TrucoGame: React.FC = () => {
                 />
               ))}
             </div>
-            {!envidoCantado && (
-              <button className="button" onClick={handleCantarEnvido}>
-                Envido
-              </button>
-            )}
-            {!trucoCantado && (
-              <button className="button" onClick={handleCantarTruco}>
-                Truco
-              </button>
-            )}
+            <div className="selectButton">
+              {!envidoCantado && (
+                <button
+                  className="button"
+                  onClick={handleCantarEnvido}
+                  disabled={debeDeshabilitarEnvido()}
+                >
+                  Envido
+                </button>
+              )}
+              {!trucoCantado && (
+                <button className="button" onClick={handleCantarTruco}>
+                  Truco
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="chat2">
           <Chat messages={chat} />
         </div>
-        {!turnoJugador && chat.includes("Computadora: Envido") && (
+        {turnoJugador && esperandoRespuestaEnvido && (
           <div className="respuestaEnvido">
             <button
               className="button"
@@ -431,6 +449,7 @@ const TrucoGame: React.FC = () => {
             </button>
           </div>
         )}
+
         {!turnoJugador && chat.includes("Computadora: Truco") && (
           <div className="respuestaTruco">
             <button
@@ -447,6 +466,11 @@ const TrucoGame: React.FC = () => {
             </button>
           </div>
         )}
+      </div>
+      <div className="reiniciarJuego">
+        <button className="button" onClick={reiniciarJuego}>
+          Reiniciar Juego
+        </button>
       </div>
     </div>
   );

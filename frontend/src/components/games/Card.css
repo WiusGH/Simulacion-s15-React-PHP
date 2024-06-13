@@ -33,14 +33,14 @@
 
 .chat {
   padding: 10px;
-  width: 350px;
-  height: 400px;
+  width: 250px;
   margin: auto 40px;
 }
 
 .chat2 {
   border: 1px solid black;
   margin: 20px;
+  height: 450px;
 }
 
 .messages {
@@ -87,4 +87,20 @@
   background-color: #b58ae0;
   color: #110d1b;
   transition: 0.3s;
+}
+
+.selectButton {
+  display: flex;
+  justify-content: center;
+}
+
+.carta-jugada {
+  position: absolute;
+  transition: left 0.3s, top 0.3s;
+}
+
+.reiniciarJuego {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
