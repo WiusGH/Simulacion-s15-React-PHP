@@ -1,0 +1,63 @@
+.profileContainer {
+  color: white;
+  display: flex;
+  background-color: rgb(79 27 131);
+  border-radius: 8px;
+  margin: 2%;
+  min-height: 70vh;
+  padding: 1%;
+  a {
+    margin-left: 15px;
+  }
+  a:hover {
+    color: black;
+  }
+}
+
+.hr {
+  margin: 15px 0 15px 0;
+}
+
+.userDetails {
+  flex: 1;
+  max-width: 25%;
+  min-width: 25%;
+  padding: 1%;
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 10%;
+  }
+}
+
+.userName {
+  font-size: 2rem;
+}
+
+.userFavorites {
+  border: 1px solid black;
+  border-radius: 8px;
+  flex: 2;
+  max-width: 50%; 
+  min-width: 50%; 
+  padding: 1%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.userAchievements {
+  flex: 1;
+  max-width: 25%; 
+  min-width: 25%; 
+  padding: 1%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.leftAlign {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+}

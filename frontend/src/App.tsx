@@ -1,9 +1,9 @@
-import Routes from "./Routes";
+import AppRoutes from "./Routes";
 
 const App: React.FC = () => {
   return (
     <div>
-      <Routes />
+      <AppRoutes />
     </div>
   );
 };
