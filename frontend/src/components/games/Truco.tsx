@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import Chat from "./Chat";
 import "./Card.css";
@@ -95,13 +95,13 @@ function seleccionarCartaComputadora(
   return cartaSeleccionada;
 }
 
-function seleccionarCartaMenor(cartasComputadora: Carta[]): Carta {
-  return cartasComputadora.reduce((menorCarta, carta) =>
-    obtenerValorCarta(carta) < obtenerValorCarta(menorCarta)
-      ? carta
-      : menorCarta
-  );
-}
+// function seleccionarCartaMenor(cartasComputadora: Carta[]): Carta {
+//   return cartasComputadora.reduce((menorCarta, carta) =>
+//     obtenerValorCarta(carta) < obtenerValorCarta(menorCarta)
+//       ? carta
+//       : menorCarta
+//   );
+// }
 
 const TrucoGame: React.FC = () => {
   const [jugador, setJugador] = useState<Carta[]>([]);
@@ -336,7 +336,7 @@ const TrucoGame: React.FC = () => {
               valor={carta.valor}
               palo={carta.palo}
               src={carta.src}
-              style={{ left: `${index * 20}px`, top: "50px" }}
+              // style={{ left: `${index * 20}px`, top: "50px" }}
             />
           ))}
         </div>
@@ -347,7 +347,7 @@ const TrucoGame: React.FC = () => {
               valor={carta.valor}
               palo={carta.palo}
               src={carta.src}
-              style={{ left: `${index * 20}px`, top: "150px" }}
+              // style={{ left: `${index * 20}px`, top: "150px" }}
             />
           ))}
         </div>
