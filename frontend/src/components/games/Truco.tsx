@@ -391,7 +391,7 @@ const TrucoGame: React.FC = () => {
                   valor={carta.valor}
                   palo={carta.palo}
                   src={`../../../public/images/cartas/back.svg`}
-                  //tapada
+                  tapada
                 />
               ))}
             </div>
